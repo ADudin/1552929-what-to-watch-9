@@ -1,10 +1,15 @@
 import FilmCardComponent from '../film-card-component/film-card-component';
 
-const FILM_CARDS_COUNT = 20;
+type MainComponentProps = {
+  filmCardsCount: number;
+  promoFilmCard: {
+    name: string,
+    genre: string,
+    released: number,
+  };
+}
 
-const filmCards = new Array(FILM_CARDS_COUNT).fill(FilmCardComponent());
-
-function MainComponent(): JSX.Element {
+function MainComponent({filmCardsCount, promoFilmCard}: MainComponentProps): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -42,10 +47,10 @@ function MainComponent(): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">The Grand Budapest Hotel</h2>
+              <h2 className="film-card__title">{promoFilmCard.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">Drama</span>
-                <span className="film-card__year">2014</span>
+                <span className="film-card__genre">{promoFilmCard.genre}</span>
+                <span className="film-card__year">{promoFilmCard.released}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -105,7 +110,7 @@ function MainComponent(): JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-            {filmCards}
+            {new Array(filmCardsCount).fill(FilmCardComponent())}
           </div>
 
           <div className="catalog__more">
