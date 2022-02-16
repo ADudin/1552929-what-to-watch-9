@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import FilmCardComponent from '../film-card-component/film-card-component';
 
 type MainComponentProps = {
@@ -110,7 +111,7 @@ function MainComponent({filmCardsCount, promoFilmCard}: MainComponentProps): JSX
           </ul>
 
           <div className="catalog__films-list">
-            {new Array(filmCardsCount).fill(FilmCardComponent())}
+            {new Array(filmCardsCount).fill(null).map((filmCard, index) => <FilmCardComponent key={index}/>)}
           </div>
 
           <div className="catalog__more">
