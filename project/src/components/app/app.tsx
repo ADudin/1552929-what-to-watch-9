@@ -3,7 +3,7 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import MainComponent from '../main-component/main-component';
 import SignInComponent from '../sign-in-component/sign-in-component';
 import MyListComponent from '../my-list-component/my-list-component';
-import FilmCardComponent from '../film-card-component/film-card-component';
+import MoviePageComponent from '../movie-page-component/movie-page-component';
 import AddReviewComponent from '../add-review-component/add-review-component';
 import PlayerComponent from '../player-component/player-component';
 import NotFoundComponent from '../not-found-component/not-found-component';
@@ -40,7 +40,7 @@ function App({filmCardsCount, promoFilmCard}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Film}
-          element={<FilmCardComponent />}
+          element={<MoviePageComponent />}
         />
         <Route
           path={AppRoute.AddReview}
