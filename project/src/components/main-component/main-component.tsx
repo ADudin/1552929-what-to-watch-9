@@ -1,4 +1,6 @@
+/* eslint-disable react/no-array-index-key */
 import FilmCardComponent from '../film-card-component/film-card-component';
+import LogoComponent from '../logo-component/logo-component';
 
 type MainComponentProps = {
   filmCardsCount: number;
@@ -20,13 +22,7 @@ function MainComponent({filmCardsCount, promoFilmCard}: MainComponentProps): JSX
         <h1 className="visually-hidden">WTW</h1>
 
         <header className="page-header film-card__head">
-          <div className="logo">
-            <a className="logo__link" href="/">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <LogoComponent />
 
           <ul className="user-block">
             <li className="user-block__item">
@@ -110,7 +106,7 @@ function MainComponent({filmCardsCount, promoFilmCard}: MainComponentProps): JSX
           </ul>
 
           <div className="catalog__films-list">
-            {new Array(filmCardsCount).fill(FilmCardComponent())}
+            {new Array(filmCardsCount).fill(null).map((filmCard, index) => <FilmCardComponent key={index}/>)}
           </div>
 
           <div className="catalog__more">
