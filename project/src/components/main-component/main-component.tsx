@@ -1,17 +1,17 @@
-/* eslint-disable react/no-array-index-key */
 import FilmCardComponent from '../film-card-component/film-card-component';
 import LogoComponent from '../logo-component/logo-component';
+import {Film} from '../../types/film';
 
 type MainComponentProps = {
-  filmCardsCount: number;
   promoFilmCard: {
     name: string,
     genre: string,
     released: number,
   };
+  films: Film[],
 }
 
-function MainComponent({filmCardsCount, promoFilmCard}: MainComponentProps): JSX.Element {
+function MainComponent({promoFilmCard, films}: MainComponentProps): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -106,7 +106,7 @@ function MainComponent({filmCardsCount, promoFilmCard}: MainComponentProps): JSX
           </ul>
 
           <div className="catalog__films-list">
-            {new Array(filmCardsCount).fill(null).map((filmCard, index) => <FilmCardComponent key={index}/>)}
+            {films.map((film) => <FilmCardComponent film={film} key={film.id} />)}
           </div>
 
           <div className="catalog__more">

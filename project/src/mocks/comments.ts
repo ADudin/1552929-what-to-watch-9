@@ -12,3 +12,5 @@ export const comments: Comment[] = [
     date: '2022-01-22T15:13:26.388Z',
   },
 ];
+
+export type Comments = Comment[];

@@ -8,23 +8,26 @@ import AddReviewComponent from '../add-review-component/add-review-component';
 import PlayerComponent from '../player-component/player-component';
 import NotFoundComponent from '../not-found-component/not-found-component';
 import PrivatRoute from '../private-route/private-route';
+import {Film} from '../../types/film';
+import {Comment} from '../../types/comment';
 
 type AppScreenProps = {
-  filmCardsCount: number;
   promoFilmCard: {
     name: string,
     genre: string,
     released: number,
   };
+  films: Film[];
+  comments: Comment[];
 }
 
-function App({filmCardsCount, promoFilmCard}: AppScreenProps): JSX.Element {
+function App({promoFilmCard, films, comments}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainComponent filmCardsCount={filmCardsCount} promoFilmCard={promoFilmCard} />}
+          element={<MainComponent promoFilmCard={promoFilmCard} films={films}/>}
         />
         <Route
           path={AppRoute.SignIn}
