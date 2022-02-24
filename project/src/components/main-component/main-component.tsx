@@ -1,4 +1,4 @@
-import FilmCardComponent from '../film-card-component/film-card-component';
+import FilmsListComponent from '../films-list-component/films-list-comonent';
 import LogoComponent from '../logo-component/logo-component';
 import {Film} from '../../types/film';
 
@@ -106,7 +106,7 @@ function MainComponent({promoFilmCard, films}: MainComponentProps): JSX.Element 
           </ul>
 
           <div className="catalog__films-list">
-            {films.map((film) => <FilmCardComponent film={film} key={film.id} />)}
+            <FilmsListComponent films = {films}/>
           </div>
 
           <div className="catalog__more">
