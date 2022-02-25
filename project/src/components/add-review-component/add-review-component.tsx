@@ -1,11 +1,21 @@
+import {useParams} from 'react-router-dom';
+import {Film} from '../../types/film';
 import LogoComponent from '../logo-component/logo-component';
 
-function AddReviewComponent(): JSX.Element {
+type AddReviewComponentProps = {
+  films: Film[];
+}
+
+
+function AddReviewComponent({films}: AddReviewComponentProps): JSX.Element {
+  const params = useParams();
+  const film = films.find((item) => item.id === Number(params.id));
+
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={film?.backgroundImage} alt={film?.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -37,7 +47,7 @@ function AddReviewComponent(): JSX.Element {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+          <img src={film?.posterImage} alt={film?.name} width="218" height="327" />
         </div>
       </div>
 

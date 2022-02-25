@@ -37,7 +37,7 @@ function App({promoFilmCard, films, comments}: AppScreenProps): JSX.Element {
           path={AppRoute.MyList}
           element={
             <PrivatRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <MyListComponent />
+              <MyListComponent films = {films} />
             </PrivatRoute>
           }
         />
@@ -47,11 +47,11 @@ function App({promoFilmCard, films, comments}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.AddReview}
-          element={<AddReviewComponent />}
+          element={<AddReviewComponent films = {films} />}
         />
         <Route
           path={AppRoute.Player}
-          element={<PlayerComponent />}
+          element={<PlayerComponent films= {films} />}
         />
         <Route
           path="*"

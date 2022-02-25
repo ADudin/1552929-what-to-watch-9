@@ -106,7 +106,7 @@ function MainComponent({promoFilmCard, films}: MainComponentProps): JSX.Element 
           </ul>
 
           <div className="catalog__films-list">
-            <FilmsListComponent films = {films}/>
+            <FilmsListComponent films = {films} />
           </div>
 
           <div className="catalog__more">
