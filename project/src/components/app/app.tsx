@@ -1,5 +1,14 @@
-import { Route, BrowserRouter, Routes } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import {
+  Route,
+  BrowserRouter,
+  Routes
+} from 'react-router-dom';
+
+import {
+  AppRoute,
+  AuthorizationStatus
+} from '../../const';
+
 import MainComponent from '../main-component/main-component';
 import SignInComponent from '../sign-in-component/sign-in-component';
 import MyListComponent from '../my-list-component/my-list-component';
@@ -43,7 +52,7 @@ function App({promoFilmCard, films, comments}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Film}
-          element={<MoviePageComponent />}
+          element={<MoviePageComponent films = {films} />}
         />
         <Route
           path={AppRoute.AddReview}
