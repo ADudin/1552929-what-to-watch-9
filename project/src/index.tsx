@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
+import {films} from './mocks/films';
+import {comments} from './mocks/comments';
 
 const Setting = {
-  FILM_CARDS_COUNT: 20,
   promoFilmCard: {
     name: 'The Grand Budapest Hotel',
     genre: 'Drama',
@@ -14,8 +15,9 @@ const Setting = {
 ReactDOM.render(
   <React.StrictMode>
     <App
-      filmCardsCount={Setting.FILM_CARDS_COUNT}
-      promoFilmCard={Setting.promoFilmCard}
+      promoFilmCard = {Setting.promoFilmCard}
+      films = {films}
+      comments = {comments}
     />
   </React.StrictMode>,
   document.getElementById('root'));

@@ -1,17 +1,17 @@
-/* eslint-disable react/no-array-index-key */
-import FilmCardComponent from '../film-card-component/film-card-component';
+import FilmsListComponent from '../films-list-component/films-list-comonent';
 import LogoComponent from '../logo-component/logo-component';
+import {Film} from '../../types/film';
 
 type MainComponentProps = {
-  filmCardsCount: number;
   promoFilmCard: {
     name: string,
     genre: string,
     released: number,
   };
+  films: Film[],
 }
 
-function MainComponent({filmCardsCount, promoFilmCard}: MainComponentProps): JSX.Element {
+function MainComponent({promoFilmCard, films}: MainComponentProps): JSX.Element {
   return (
     <>
       <section className="film-card">
@@ -106,7 +106,7 @@ function MainComponent({filmCardsCount, promoFilmCard}: MainComponentProps): JSX
           </ul>
 
           <div className="catalog__films-list">
-            {new Array(filmCardsCount).fill(null).map((filmCard, index) => <FilmCardComponent key={index}/>)}
+            <FilmsListComponent films = {films} />
           </div>
 
           <div className="catalog__more">
@@ -115,13 +115,7 @@ function MainComponent({filmCardsCount, promoFilmCard}: MainComponentProps): JSX
         </section>
 
         <footer className="page-footer">
-          <div className="logo">
-            <a className="logo__link logo__link--light" href="/">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </a>
-          </div>
+          <LogoComponent />
 
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>
