@@ -7,13 +7,19 @@ type FilmCardComponentProps = {
   film: Film,
 }
 
+let timer: number | null = null;
+
 function FilmCardComponent({film}: FilmCardComponentProps): JSX.Element {
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [activePlayer, setActivePlayer] = useState<number | null>(null);
+
   const handleMouseEnter = () => {
-    setTimeout(() => setIsPlaying(true), 1000);
+    timer = window.setTimeout(() => setActivePlayer(activePlayer === film.id ? -1 : film.id), 1000);
   };
   const handleMouseLeave = () => {
-    setIsPlaying(false);
+    if (timer) {
+      clearTimeout(timer);
+    }
+    setActivePlayer(null);
   };
 
   return (
@@ -23,7 +29,7 @@ function FilmCardComponent({film}: FilmCardComponentProps): JSX.Element {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <VideoPlayerComponent isPlaying = {isPlaying} film = {film} />
+        <VideoPlayerComponent isPlaying = {film.id === activePlayer} film = {film} />
       </div>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`/films/${film.id}`}>{film.name}</Link>
