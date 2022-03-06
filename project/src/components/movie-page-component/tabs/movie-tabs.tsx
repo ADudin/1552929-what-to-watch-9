@@ -1,5 +1,5 @@
 import {Film} from '../../../types/film';
-//import {Review} from '../../../types/review';
+import {Review} from '../../../types/review';
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
 import DetailsTab from './tab-details/tab-details';
@@ -8,7 +8,7 @@ import ReviewsTab from './tab-reviews/tab-reviews';
 
 type MovieTabsProps = {
   film: Film | undefined,
-  //reviews: Review[],
+  reviews: Review[],
 }
 
 type MovieTab = {
@@ -16,7 +16,7 @@ type MovieTab = {
   title: string;
 }
 
-function MovieTabs({film/*, reviews*/}: MovieTabsProps): JSX.Element {
+function MovieTabs({film, reviews}: MovieTabsProps): JSX.Element {
   const movieTabs: MovieTab[] = [
     {
       id: 1,
@@ -58,9 +58,9 @@ function MovieTabs({film/*, reviews*/}: MovieTabsProps): JSX.Element {
           ))}
         </ul>
       </nav>
-      {activeTab === 1 && <OverviewTab film={film} />}
-      {activeTab === 2 && <DetailsTab film={film} />}
-      {activeTab === 3 && <ReviewsTab />}
+      {activeTab === 1 && <OverviewTab film = {film} />}
+      {activeTab === 2 && <DetailsTab film = {film} />}
+      {activeTab === 3 && <ReviewsTab reviews = {reviews} />}
     </>
   );
 }
