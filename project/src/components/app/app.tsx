@@ -18,7 +18,7 @@ import PlayerComponent from '../player-component/player-component';
 import NotFoundComponent from '../not-found-component/not-found-component';
 import PrivatRoute from '../private-route/private-route';
 import {Film} from '../../types/film';
-import {Comment} from '../../types/comment';
+import {Review} from '../../types/review';
 
 type AppScreenProps = {
   promoFilmCard: {
@@ -27,10 +27,10 @@ type AppScreenProps = {
     released: number,
   };
   films: Film[];
-  comments: Comment[];
+  reviews: Review[];
 }
 
-function App({promoFilmCard, films, comments}: AppScreenProps): JSX.Element {
+function App({promoFilmCard, films, reviews}: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>

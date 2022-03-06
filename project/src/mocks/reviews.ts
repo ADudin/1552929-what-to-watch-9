@@ -1,6 +1,6 @@
-import {Comment} from '../types/comment';
+import {Review} from '../types/review';
 
-export const comments: Comment[] = [
+export const reviews: Review[] = [
   {
     id: 1,
     user: {
@@ -12,5 +12,3 @@ export const comments: Comment[] = [
     date: '2022-01-22T15:13:26.388Z',
   },
 ];
-
-export type Comments = Comment[];

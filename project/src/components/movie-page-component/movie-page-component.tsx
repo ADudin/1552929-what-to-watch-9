@@ -100,7 +100,7 @@ function MoviePageComponent({films}: MoviePageComponentProps): JSX.Element {
 
                 <p className="film-card__director"><strong>Director: {film?.director}</strong></p>
 
-                <p className="film-card__starring"><strong>Starring: {film?.starring} and other</strong></p>
+                <p className="film-card__starring"><strong>Starring: {film?.starring.join(', ')} and other</strong></p>
               </div>
             </div>
           </div>
