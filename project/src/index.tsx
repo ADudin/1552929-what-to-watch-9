@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/app/app';
 import {films} from './mocks/films';
-import {comments} from './mocks/comments';
+import {reviews} from './mocks/reviews';
 
 const Setting = {
   promoFilmCard: {
@@ -17,7 +17,7 @@ ReactDOM.render(
     <App
       promoFilmCard = {Setting.promoFilmCard}
       films = {films}
-      comments = {comments}
+      reviews = {reviews}
     />
   </React.StrictMode>,
   document.getElementById('root'));

@@ -1,5 +1,8 @@
 import LogoComponent from '../logo-component/logo-component';
+import MovieTabs from './tabs/movie-tabs';
+import FilmsListComponent from '../films-list-component/films-list-comonent';
 import {Film} from '../../types/film';
+import {Review} from '../../types/review';
 import {
   useParams,
   Link
@@ -7,12 +10,16 @@ import {
 
 type MoviePageComponentProps = {
   films: Film[],
+  reviews: Review[],
 }
 
-function MoviePageComponent({films}: MoviePageComponentProps): JSX.Element {
+const FILTERED_FILMS_COUNT = 4;
+
+function MoviePageComponent({films, reviews}: MoviePageComponentProps): JSX.Element {
   const params = useParams();
   const filmId = Number(params.id);
-  const film = films.find((item) => item.id === filmId);
+  const film: Film | undefined = films.find((item) => item.id === filmId);
+  const filteredFilms: Film[] | undefined = films.filter((item) => item.genre === film?.genre && item.id !== filmId);
 
   return (
     <>
@@ -73,35 +80,7 @@ function MoviePageComponent({films}: MoviePageComponentProps): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <nav className="film-nav film-card__nav">
-                <ul className="film-nav__list">
-                  <li className="film-nav__item film-nav__item--active">
-                    <a href="/" className="film-nav__link">Overview</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">Details</a>
-                  </li>
-                  <li className="film-nav__item">
-                    <a href="/" className="film-nav__link">Reviews</a>
-                  </li>
-                </ul>
-              </nav>
-
-              <div className="film-rating">
-                <div className="film-rating__score">{film?.rating}</div>
-                <p className="film-rating__meta">
-                  <span className="film-rating__level">Very good</span>
-                  <span className="film-rating__count">{`${film?.scoresCount} ratings`}</span>
-                </p>
-              </div>
-
-              <div className="film-card__text">
-                <p>{film?.description}</p>
-
-                <p className="film-card__director"><strong>Director: {film?.director}</strong></p>
-
-                <p className="film-card__starring"><strong>Starring: {film?.starring} and other</strong></p>
-              </div>
+              <MovieTabs film = {film} reviews = {reviews} />
             </div>
           </div>
         </div>
@@ -112,41 +91,7 @@ function MoviePageComponent({films}: MoviePageComponentProps): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/fantastic-beasts-the-crimes-of-grindelwald.jpg" alt="Fantastic Beasts: The Crimes of Grindelwald" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Fantastic Beasts: The Crimes of Grindelwald</a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/bohemian-rhapsody.jpg" alt="Bohemian Rhapsody" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Bohemian Rhapsody</a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/macbeth.jpg" alt="Macbeth" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Macbeth</a>
-              </h3>
-            </article>
-
-            <article className="small-film-card catalog__films-card">
-              <div className="small-film-card__image">
-                <img src="img/aviator.jpg" alt="Aviator" width="280" height="175" />
-              </div>
-              <h3 className="small-film-card__title">
-                <a className="small-film-card__link" href="film-page.html">Aviator</a>
-              </h3>
-            </article>
+            {<FilmsListComponent films = {filteredFilms.slice(0, FILTERED_FILMS_COUNT)} />}
           </div>
         </section>
 
