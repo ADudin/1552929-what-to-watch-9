@@ -1,7 +1,7 @@
 import {Film} from '../../../../types/film';
 
 type OverviewTabProps = {
-  film: Film,
+  film: Film | undefined,
 }
 
 function OverviewTab({film}: OverviewTabProps): JSX.Element {
