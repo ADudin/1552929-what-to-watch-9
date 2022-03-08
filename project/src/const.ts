@@ -47,3 +47,5 @@ export const RATING_VALUES: RatingValue[] = [
     'value': 1,
   },
 ];
+
+export const DEFAULT_ACTIVE_GENRE = 'All genres';
