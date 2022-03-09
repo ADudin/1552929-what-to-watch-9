@@ -3,7 +3,7 @@ import LogoComponent from '../logo-component/logo-component';
 import GenresListComponent from '../genres-list-component/genres-list-component';
 import {Film} from '../../types/film';
 import {useState, useEffect} from 'react';
-import {useAppSelector} from '../../hooks/index';
+import {useAppSelector} from '../../hooks/hooks';
 import {State} from '../../types/state';
 import {DEFAULT_ACTIVE_GENRE} from '../../const';
 

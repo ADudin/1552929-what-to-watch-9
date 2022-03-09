@@ -1,4 +1,4 @@
-import {useAppDispatch, useAppSelector} from '../../hooks/index';
+import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {State} from '../../types/state';
 import {setActiveGenre} from '../../store/action';
 import {Link} from 'react-router-dom';

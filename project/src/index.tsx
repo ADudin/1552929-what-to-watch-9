@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import App from './components/app/app';
 import {films} from './mocks/films';
 import {reviews} from './mocks/reviews';
-import {store} from './store';
+import {store} from './store/store';
 
 const Setting = {
   promoFilmCard: {
