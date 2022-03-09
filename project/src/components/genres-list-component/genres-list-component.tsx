@@ -1,6 +1,9 @@
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
 import {State} from '../../types/state';
-import {setActiveGenre} from '../../store/action';
+import {
+  setActiveGenre,
+  resetCountAction
+} from '../../store/action';
 import {Link} from 'react-router-dom';
 
 type GenresListComponentProps = {
@@ -17,7 +20,10 @@ function GenresListComponent({genres}: GenresListComponentProps): JSX.Element {
         <li
           key = {genre}
           className = {`catalog__genres-item ${genre === activeGenre ? 'catalog__genres-item--active' : ''}`}
-          onClick = {() => dispatch(setActiveGenre(genre))}
+          onClick = {() => {
+            dispatch(setActiveGenre(genre));
+            dispatch(resetCountAction());
+          }}
         >
           <Link to={' '} className="catalog__genres-link">{genre}</Link>
         </li>
