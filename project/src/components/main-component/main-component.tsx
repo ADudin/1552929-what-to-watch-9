@@ -1,12 +1,16 @@
 import FilmsListComponent from '../films-list-component/films-list-comonent';
 import LogoComponent from '../logo-component/logo-component';
 import GenresListComponent from '../genres-list-component/genres-list-component';
+import ShowMoreButtonComponent from '../show-more-button-component/show-more-button-component';
 import {Film} from '../../types/film';
 import {useState, useEffect} from 'react';
-import {useAppSelector} from '../../hooks/hooks';
+import {
+  useAppSelector,
+  useAppDispatch
+} from '../../hooks/hooks';
 import {State} from '../../types/state';
 import {DEFAULT_ACTIVE_GENRE} from '../../const';
-
+import {resetCountAction} from '../../store/action';
 
 type MainComponentProps = {
   promoFilmCard: {
@@ -19,11 +23,18 @@ type MainComponentProps = {
 
 function MainComponent({promoFilmCard, films}: MainComponentProps): JSX.Element {
   const filteredFilms = useAppSelector((state: State) => state.films);
+  const renderedFilmCards = useAppSelector((state: State) => state.filmCardsCount);
+  const dispatch = useAppDispatch();
+
   const [genres, setGenres] = useState<string[]>([]);
 
   useEffect(() => {
     setGenres([DEFAULT_ACTIVE_GENRE, ...new Set(films.map((film) => film.genre))]);
   }, [films]);
+
+  useEffect(() => {
+    dispatch(resetCountAction());
+  }, [dispatch]);
 
   return (
     <>
@@ -90,11 +101,11 @@ function MainComponent({promoFilmCard, films}: MainComponentProps): JSX.Element 
           </ul>
 
           <div className="catalog__films-list">
-            <FilmsListComponent films = {filteredFilms} />
+            <FilmsListComponent films = {filteredFilms.slice(0, renderedFilmCards)} />
           </div>
 
           <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
+            {filteredFilms.length > renderedFilmCards ? <ShowMoreButtonComponent /> : ''}
           </div>
         </section>
 

@@ -49,3 +49,7 @@ export const RATING_VALUES: RatingValue[] = [
 ];
 
 export const DEFAULT_ACTIVE_GENRE = 'All genres';
+
+export const FILM_CARDS_COUNT = 4;
+
+export const FILM_CARDS_COUNT_STEP = 4;
