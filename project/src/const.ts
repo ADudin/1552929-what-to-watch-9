@@ -53,3 +53,22 @@ export const DEFAULT_ACTIVE_GENRE = 'All genres';
 export const FILM_CARDS_COUNT = 8;
 
 export const FILM_CARDS_COUNT_STEP = 8;
+
+export enum APIRoute {
+  Films = '/films',
+  Film = '/films/:id',
+  SimilarFilm = '/films/:id/Similar',
+  PromoFilm = '/promo',
+  Favorite = '/favorite',
+  Comments = '/comments/:id',
+  Login = '/login',
+  Logout = '/logout',
+}
+
+export const TIMEOUT_SHOW_ERROR = 2000;
+
+export enum HTTP_CODE {
+  BAD_REQUEST = 400,
+  UNAUTHORIZED = 401,
+  NOT_FOUND = 404,
+}
