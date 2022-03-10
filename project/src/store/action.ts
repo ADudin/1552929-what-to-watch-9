@@ -10,4 +10,8 @@ export const resetCountAction = createAction('main/resetCountAction');
 
 export const loadFilms = createAction<Film[]>('data/loadFilms');
 
+export const loadPromoFilm = createAction<Film>('data/loadPromoFilm');
+
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
+
+export const setError = createAction<string>('main/setError');

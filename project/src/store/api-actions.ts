@@ -9,7 +9,9 @@ import {Film} from '../types/film';
 
 import {
   loadFilms,
-  requireAuthorization
+  requireAuthorization,
+  setError,
+  loadPromoFilm
 } from './action';
 
 import {
@@ -17,44 +19,87 @@ import {
   dropToken
 } from '../services/token';
 
+import {errorHandle} from '../services/error-handle';
+
 import {
   APIRoute,
-  AuthorizationStatus
+  AuthorizationStatus,
+  TIMEOUT_SHOW_ERROR
 } from '../const';
 
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 
+export const clearErrorAction = createAsyncThunk(
+  'main/clearError',
+  () => {
+    setTimeout(
+      () => store.dispatch(setError('')),
+      TIMEOUT_SHOW_ERROR,
+    );
+  },
+);
+
 export const fetchFilmsAction = createAsyncThunk(
   'data/fetchFilms',
   async () => {
-    const {data} = await api.get<Film[]>(APIRoute.Films);
-    store.dispatch(loadFilms(data));
+    try {
+      const {data} = await api.get<Film[]>(APIRoute.Films);
+      store.dispatch(loadFilms(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchPromoFilmAction = createAsyncThunk(
+  'data/fetchPromoFilm',
+  async () => {
+    try {
+      const {data} = await api.get<Film>(APIRoute.PromoFilm);
+      store.dispatch(loadPromoFilm(data));
+    } catch (error) {
+      errorHandle(error);
+    }
   },
 );
 
 export const checkAuthAction = createAsyncThunk(
   'user/checkAuth',
   async () => {
-    await api.get(APIRoute.Login);
-    store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    try {
+      await api.get(APIRoute.Login);
+      store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    } catch (error) {
+      errorHandle(error);
+      store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    }
   },
 );
 
 export const loginAction = createAsyncThunk(
   'user/login',
   async ({login: email, password}: AuthData) => {
-    const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
-    saveToken(token);
-    store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    try {
+      const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
+      saveToken(token);
+      store.dispatch(requireAuthorization(AuthorizationStatus.Auth));
+    } catch (error) {
+      errorHandle(error);
+      store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    }
   },
 );
 
 export const logoutAction = createAsyncThunk(
   'user.logout',
   async () => {
-    await api.delete(APIRoute.Logout);
-    dropToken();
-    store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    try {
+      await api.delete(APIRoute.Logout);
+      dropToken();
+      store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    } catch (error) {
+      errorHandle(error);
+    }
   },
 );

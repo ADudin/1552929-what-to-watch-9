@@ -2,35 +2,47 @@ import FilmsListComponent from '../films-list-component/films-list-comonent';
 import LogoComponent from '../logo-component/logo-component';
 import GenresListComponent from '../genres-list-component/genres-list-component';
 import ShowMoreButtonComponent from '../show-more-button-component/show-more-button-component';
-import {Film} from '../../types/film';
-import {useState, useEffect} from 'react';
+
+import {
+  useState,
+  useEffect
+} from 'react';
+
+import {useNavigate} from 'react-router-dom';
+
 import {
   useAppSelector,
   useAppDispatch
 } from '../../hooks/hooks';
+
 import {State} from '../../types/state';
 import {DEFAULT_ACTIVE_GENRE} from '../../const';
 import {resetCountAction} from '../../store/action';
+import {Film} from '../../types/film';
 
-type MainComponentProps = {
-  promoFilmCard: {
-    name: string,
-    genre: string,
-    released: number,
-  };
-  films: Film[],
-}
-
-function MainComponent({promoFilmCard, films}: MainComponentProps): JSX.Element {
-  const filteredFilms = useAppSelector((state: State) => state.films);
-  const renderedFilmCards = useAppSelector((state: State) => state.filmCardsCount);
+function MainComponent(): JSX.Element {
+  const initialFilms = useAppSelector((state: State) => state.films);
+  const activeGenre = useAppSelector((state: State) => state.activeGenre);
+  const promoFilmCard = useAppSelector((state: State) => state.promoFilm);
+  const filteredFilms = activeGenre === DEFAULT_ACTIVE_GENRE ? initialFilms : initialFilms.filter((film) => film.genre === activeGenre);
+  const renderedFilmCardsCount = useAppSelector((state: State) => state.filmCardsCount);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const {
+    id,
+    name,
+    genre,
+    released,
+    posterImage,
+    backgroundImage,
+  } = promoFilmCard as Film;
 
   const [genres, setGenres] = useState<string[]>([]);
 
   useEffect(() => {
-    setGenres([DEFAULT_ACTIVE_GENRE, ...new Set(films.map((film) => film.genre))]);
-  }, [films]);
+    setGenres([DEFAULT_ACTIVE_GENRE, ...new Set(initialFilms.map((film) => film.genre))]);
+  }, [initialFilms]);
 
   useEffect(() => {
     dispatch(resetCountAction());
@@ -40,7 +52,7 @@ function MainComponent({promoFilmCard, films}: MainComponentProps): JSX.Element 
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={backgroundImage} alt={name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -63,18 +75,22 @@ function MainComponent({promoFilmCard, films}: MainComponentProps): JSX.Element 
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{promoFilmCard.name}</h2>
+              <h2 className="film-card__title">{name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{promoFilmCard.genre}</span>
-                <span className="film-card__year">{promoFilmCard.released}</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{released}</span>
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button
+                  className="btn btn--play film-card__button"
+                  type="button"
+                  onClick = {() => navigate(`/player/${id}`)}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
@@ -101,11 +117,11 @@ function MainComponent({promoFilmCard, films}: MainComponentProps): JSX.Element 
           </ul>
 
           <div className="catalog__films-list">
-            <FilmsListComponent films = {filteredFilms.slice(0, renderedFilmCards)} />
+            <FilmsListComponent films = {filteredFilms.slice(0, renderedFilmCardsCount)} />
           </div>
 
           <div className="catalog__more">
-            {filteredFilms.length > renderedFilmCards ? <ShowMoreButtonComponent /> : ''}
+            {filteredFilms.length > renderedFilmCardsCount ? <ShowMoreButtonComponent /> : ''}
           </div>
         </section>
 

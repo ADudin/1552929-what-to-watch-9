@@ -3,24 +3,24 @@ import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
 
 import App from './components/app/app';
-import {films} from './mocks/films';
+import ErrorMessage from './components/error-message/error-message';
 import {reviews} from './mocks/reviews';
 import {store} from './store/store';
+import {
+  fetchFilmsAction,
+  //checkAuthAction,
+  fetchPromoFilmAction
+} from './store/api-actions';
 
-const Setting = {
-  promoFilmCard: {
-    name: 'The Grand Budapest Hotel',
-    genre: 'Drama',
-    released: 2014,
-  },
-};
+store.dispatch(fetchFilmsAction());
+store.dispatch(fetchPromoFilmAction());
+//store.dispatch(checkAuthAction());
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+      <ErrorMessage />
       <App
-        promoFilmCard = {Setting.promoFilmCard}
-        films = {films}
         reviews = {reviews}
       />
     </Provider>

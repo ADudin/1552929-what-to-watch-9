@@ -4,9 +4,10 @@ import {
   Routes
 } from 'react-router-dom';
 
+import {useAppSelector} from '../../hooks/hooks';
+
 import {
-  AppRoute,
-  AuthorizationStatus
+  AppRoute
 } from '../../const';
 
 import MainComponent from '../main-component/main-component';
@@ -16,27 +17,31 @@ import MoviePageComponent from '../movie-page-component/movie-page-component';
 import AddReviewComponent from '../add-review-component/add-review-component';
 import PlayerComponent from '../player-component/player-component';
 import NotFoundComponent from '../not-found-component/not-found-component';
+import LoadingScreen from '../loading-screen/loading-screen';
+
 import PrivatRoute from '../private-route/private-route';
-import {Film} from '../../types/film';
 import {Review} from '../../types/review';
 
 type AppScreenProps = {
-  promoFilmCard: {
-    name: string,
-    genre: string,
-    released: number,
-  };
-  films: Film[];
   reviews: Review[];
 }
 
-function App({promoFilmCard, films, reviews}: AppScreenProps): JSX.Element {
+function App({reviews}: AppScreenProps): JSX.Element {
+  const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
+  const films = useAppSelector((state) => state.films);
+
+  if (!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Main}
-          element={<MainComponent promoFilmCard={promoFilmCard} films={films}/>}
+          element={<MainComponent />}
         />
         <Route
           path={AppRoute.SignIn}
@@ -45,7 +50,7 @@ function App({promoFilmCard, films, reviews}: AppScreenProps): JSX.Element {
         <Route
           path={AppRoute.MyList}
           element={
-            <PrivatRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+            <PrivatRoute authorizationStatus={authorizationStatus}>
               <MyListComponent films = {films} />
             </PrivatRoute>
           }
