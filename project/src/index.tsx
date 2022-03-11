@@ -8,13 +8,13 @@ import {reviews} from './mocks/reviews';
 import {store} from './store/store';
 import {
   fetchFilmsAction,
-  //checkAuthAction,
+  checkAuthAction,
   fetchPromoFilmAction
 } from './store/api-actions';
 
 store.dispatch(fetchFilmsAction());
 store.dispatch(fetchPromoFilmAction());
-//store.dispatch(checkAuthAction());
+store.dispatch(checkAuthAction());
 
 ReactDOM.render(
   <React.StrictMode>
