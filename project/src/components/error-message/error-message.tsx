@@ -14,6 +14,7 @@ function ErrorMessage(): JSX.Element | null {
           backgroundColor: '#d96666',
           color: 'white',
           borderRadius: '5px',
+          zIndex: 100,
         }}
       >
         {error}

@@ -1,12 +1,21 @@
 import LogoComponent from '../logo-component/logo-component';
 import MovieTabs from './tabs/movie-tabs';
 import FilmsListComponent from '../films-list-component/films-list-comonent';
+import UserBlockComponent from '../user-block-component/user-block-component';
 import {Film} from '../../types/film';
 import {Review} from '../../types/review';
+
 import {
   useParams,
   Link
 } from 'react-router-dom';
+
+import {
+  AuthorizationStatus,
+  AppRoute
+} from '../../const';
+
+import {useAppSelector} from '../../hooks/hooks';
 
 type MoviePageComponentProps = {
   films: Film[],
@@ -21,6 +30,8 @@ function MoviePageComponent({films, reviews}: MoviePageComponentProps): JSX.Elem
   const film: Film | undefined = films.find((item) => item.id === filmId);
   const filteredFilms: Film[] | undefined = films.filter((item) => item.genre === film?.genre && item.id !== filmId);
 
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
   return (
     <>
       <section className="film-card film-card--full">
@@ -34,16 +45,7 @@ function MoviePageComponent({films, reviews}: MoviePageComponentProps): JSX.Elem
           <header className="page-header film-card__head">
             <LogoComponent />
 
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <a className="user-block__link" href="/">Sign out</a>
-              </li>
-            </ul>
+            <UserBlockComponent />
           </header>
 
           <div className="film-card__wrap">
@@ -67,7 +69,7 @@ function MoviePageComponent({films, reviews}: MoviePageComponentProps): JSX.Elem
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={`/films/${film?.id}/review`} className="btn film-card__button">Add review</Link>
+                <Link to={authorizationStatus === AuthorizationStatus.Auth ? `/films/${film?.id}/review` : AppRoute.SignIn} className="btn film-card__button">Add review</Link>
               </div>
             </div>
           </div>
