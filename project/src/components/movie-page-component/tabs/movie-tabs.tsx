@@ -7,7 +7,7 @@ import OverviewTab from './tab-overview/tab-overview';
 import ReviewsTab from './tab-reviews/tab-reviews';
 
 type MovieTabsProps = {
-  film: Film | undefined,
+  film: Film | object,
   reviews: Review[],
 }
 

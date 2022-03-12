@@ -1,18 +1,18 @@
 import {Film} from '../../../../types/film';
 
 type DetailsTabProps = {
-  film: Film | undefined,
+  film: Film | object,
 }
 
-const getRuntimeFromMinutes = (mins: number | undefined) => {
+const getRuntimeFromMinutes = (mins: number) => {
   if (!mins) {
     return;
   }
 
   const HOURS_ABB = 'h ';
   const MINUTES_ABB = 'm';
-  const hours: number | undefined = Math.trunc(mins / 60);
-  const minutes: number | undefined = mins % 60;
+  const hours: number = Math.trunc(mins / 60);
+  const minutes: number = mins % 60;
 
   if (mins < 60) {
 
@@ -28,17 +28,25 @@ const getRuntimeFromMinutes = (mins: number | undefined) => {
 };
 
 function DetailsTab({film}: DetailsTabProps): JSX.Element {
+  const {
+    director,
+    starring,
+    runTime,
+    genre,
+    released,
+  } = film as Film;
+
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Director</strong>
-          <span className="film-card__details-value">{film?.director}</span>
+          <span className="film-card__details-value">{director}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Starring</strong>
           <span className="film-card__details-value">
-            {film?.starring.join(', ')}
+            {starring.join(', ')}
           </span>
         </p>
       </div>
@@ -46,15 +54,15 @@ function DetailsTab({film}: DetailsTabProps): JSX.Element {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{getRuntimeFromMinutes(film?.runTime)}</span>
+          <span className="film-card__details-value">{getRuntimeFromMinutes(runTime)}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
-          <span className="film-card__details-value">{film?.genre}</span>
+          <span className="film-card__details-value">{genre}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Released</strong>
-          <span className="film-card__details-value">{film?.released}</span>
+          <span className="film-card__details-value">{released}</span>
         </p>
       </div>
     </div>

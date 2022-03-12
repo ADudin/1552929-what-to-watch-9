@@ -56,11 +56,11 @@ export const FILM_CARDS_COUNT_STEP = 8;
 
 export enum APIRoute {
   Films = '/films',
-  Film = '/films/:id',
-  SimilarFilm = '/films/:id/Similar',
+  Film = '/films/',
+  SimilarFilms = '/films/',
   PromoFilm = '/promo',
   Favorite = '/favorite',
-  Comments = '/comments/:id',
+  Comments = '/comments/',
   Login = '/login',
   Logout = '/logout',
 }

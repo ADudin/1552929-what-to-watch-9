@@ -20,13 +20,8 @@ import NotFoundComponent from '../not-found-component/not-found-component';
 import LoadingScreen from '../loading-screen/loading-screen';
 
 import PrivatRoute from '../private-route/private-route';
-import {Review} from '../../types/review';
 
-type AppScreenProps = {
-  reviews: Review[];
-}
-
-function App({reviews}: AppScreenProps): JSX.Element {
+function App(): JSX.Element {
   const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
   const films = useAppSelector((state) => state.films);
 
@@ -57,7 +52,7 @@ function App({reviews}: AppScreenProps): JSX.Element {
         />
         <Route
           path={AppRoute.Film}
-          element={<MoviePageComponent films = {films} reviews = {reviews} />}
+          element={<MoviePageComponent />}
         />
         <Route
           path={AppRoute.AddReview}

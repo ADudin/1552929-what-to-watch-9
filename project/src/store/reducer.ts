@@ -1,4 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
+
 import {
   setActiveGenre,
   incCountAction,
@@ -6,7 +7,10 @@ import {
   loadFilms,
   requireAuthorization,
   setError,
-  loadPromoFilm
+  loadPromoFilm,
+  loadFilm,
+  loadSimilarFilms,
+  loadReviews
 } from './action';
 
 import {
@@ -15,11 +19,16 @@ import {
   FILM_CARDS_COUNT_STEP,
   AuthorizationStatus
 } from '../const';
+
 import {Film} from '../types/film';
+import {Review} from '../types/review';
 
 type InitialState = {
   activeGenre: string,
+  film: Film | object,
   films: Film[],
+  similarFilms: Film[],
+  reviews: Review[],
   promoFilm: Film | object,
   filmCardsCount: number,
   authorizationStatus: AuthorizationStatus,
@@ -29,7 +38,10 @@ type InitialState = {
 
 const initialState: InitialState = {
   activeGenre: DEFAULT_ACTIVE_GENRE,
+  film: {},
   films: [],
+  similarFilms: [],
+  reviews: [],
   promoFilm: {},
   filmCardsCount: FILM_CARDS_COUNT,
   authorizationStatus: AuthorizationStatus.Unknown,
@@ -60,6 +72,15 @@ const reducer = createReducer(initialState, (builder)=> {
     })
     .addCase(loadPromoFilm, (state, action) => {
       state.promoFilm = action.payload;
+    })
+    .addCase(loadFilm, (state, action) =>{
+      state.film = action.payload;
+    })
+    .addCase(loadSimilarFilms, (state, action) => {
+      state.similarFilms = action.payload;
+    })
+    .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
     });
 });
 
