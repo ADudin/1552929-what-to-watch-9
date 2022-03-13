@@ -16,6 +16,7 @@ export type State = {
   userData: UserData | object,
   error: string,
   isDataLoaded: boolean,
+  isDataSending: boolean,
 };
 
 export type AppDispatch = typeof store.dispatch;

@@ -2,6 +2,8 @@ import LogoComponent from '../logo-component/logo-component';
 import MovieTabs from './tabs/movie-tabs';
 import FilmsListComponent from '../films-list-component/films-list-comonent';
 import UserBlockComponent from '../user-block-component/user-block-component';
+import LoadingScreen from '../loading-screen/loading-screen';
+
 import {Film} from '../../types/film';
 import {useEffect} from 'react';
 
@@ -12,28 +14,36 @@ import {
 
 import {AuthorizationStatus} from '../../const';
 
-import {useAppSelector} from '../../hooks/hooks';
-import {store} from '../../store/store';
+import {
+  useAppDispatch,
+  useAppSelector
+} from '../../hooks/hooks';
+
 import {
   fetchFilmAction,
   fetchSimilarFilmsAction,
   fetchReviewsAction
 } from '../../store/api-actions';
 
+import {setDataLoading} from '../../store/action';
+
 function MoviePageComponent(): JSX.Element {
+  const dispatch = useAppDispatch();
   const params = useParams();
   const filmId = Number(params.id);
 
   useEffect(() => {
-    store.dispatch(fetchFilmAction(filmId));
-    store.dispatch(fetchSimilarFilmsAction(filmId));
-    store.dispatch(fetchReviewsAction(filmId));
-  }, [filmId]);
+    dispatch(setDataLoading(true));
+    dispatch(fetchFilmAction(filmId));
+    dispatch(fetchSimilarFilmsAction(filmId));
+    dispatch(fetchReviewsAction(filmId));
+  }, [dispatch, filmId]);
 
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const film = useAppSelector((state) => state.film);
   const similarFilms = useAppSelector((state) => state.similarFilms);
   const reviews = useAppSelector((state) => state.reviews);
+  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
 
   const {
     id,
@@ -45,6 +55,12 @@ function MoviePageComponent(): JSX.Element {
   } = film as Film;
 
   const filteredSimilarFilms = similarFilms?.filter((item) => item.id !== filmId);
+
+  if (!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <>

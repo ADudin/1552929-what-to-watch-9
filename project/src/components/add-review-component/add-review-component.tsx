@@ -1,10 +1,19 @@
 import {
   useParams,
+  useNavigate,
   Link
 } from 'react-router-dom';
+
 import {Film} from '../../types/film';
 import LogoComponent from '../logo-component/logo-component';
+import UserBlockComponent from '../user-block-component/user-block-component';
 import ReviewFormComponent from '../review-form-component/review-form-component';
+import {useAppSelector} from '../../hooks/hooks';
+import {useEffect} from 'react';
+import {
+  AuthorizationStatus,
+  AppRoute
+} from '../../const';
 
 type AddReviewComponentProps = {
   films: Film[];
@@ -13,8 +22,16 @@ type AddReviewComponentProps = {
 
 function AddReviewComponent({films}: AddReviewComponentProps): JSX.Element {
   const params = useParams();
+  const navigate = useNavigate();
   const film = films.find((item) => item.id === Number(params.id));
-  const rating = Number(film?.rating);
+
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+
+  useEffect(() => {
+    if (authorizationStatus !== AuthorizationStatus.Auth) {
+      navigate(AppRoute.SignIn);
+    }
+  }, [navigate, authorizationStatus]);
 
   return (
     <section className="film-card film-card--full">
@@ -39,16 +56,7 @@ function AddReviewComponent({films}: AddReviewComponentProps): JSX.Element {
             </ul>
           </nav>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link" href="/">Sign out</a>
-            </li>
-          </ul>
+          <UserBlockComponent />
         </header>
 
         <div className="film-card__poster film-card__poster--small">
@@ -56,7 +64,7 @@ function AddReviewComponent({films}: AddReviewComponentProps): JSX.Element {
         </div>
       </div>
 
-      <ReviewFormComponent rating = {rating} />
+      <ReviewFormComponent />
 
     </section>
 

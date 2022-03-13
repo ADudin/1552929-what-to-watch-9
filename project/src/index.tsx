@@ -7,12 +7,10 @@ import ErrorMessage from './components/error-message/error-message';
 import {store} from './store/store';
 import {
   fetchFilmsAction,
-  checkAuthAction,
-  fetchPromoFilmAction
+  checkAuthAction
 } from './store/api-actions';
 
 store.dispatch(fetchFilmsAction());
-store.dispatch(fetchPromoFilmAction());
 store.dispatch(checkAuthAction());
 
 ReactDOM.render(

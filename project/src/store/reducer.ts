@@ -11,7 +11,9 @@ import {
   loadFilm,
   loadSimilarFilms,
   loadReviews,
-  loadUserData
+  loadUserData,
+  sendReview,
+  setDataLoading
 } from './action';
 
 import {
@@ -36,6 +38,7 @@ type InitialState = {
   authorizationStatus: AuthorizationStatus,
   userData: UserData | object,
   isDataLoaded: boolean,
+  isDataSending: boolean,
   error: string,
 }
 
@@ -50,6 +53,7 @@ const initialState: InitialState = {
   authorizationStatus: AuthorizationStatus.Unknown,
   userData: {},
   isDataLoaded: false,
+  isDataSending: false,
   error: '',
 };
 
@@ -76,18 +80,29 @@ const reducer = createReducer(initialState, (builder)=> {
     })
     .addCase(loadPromoFilm, (state, action) => {
       state.promoFilm = action.payload;
+      state.isDataLoaded = true;
     })
     .addCase(loadFilm, (state, action) =>{
       state.film = action.payload;
+      state.isDataLoaded = true;
     })
     .addCase(loadSimilarFilms, (state, action) => {
       state.similarFilms = action.payload;
+      state.isDataLoaded = true;
     })
     .addCase(loadReviews, (state, action) => {
       state.reviews = action.payload;
+      state.isDataLoaded = true;
     })
     .addCase(loadUserData, (state, action) => {
       state.userData = action.payload;
+      state.isDataLoaded = true;
+    })
+    .addCase(sendReview, (state, action) => {
+      state.isDataSending = action.payload;
+    })
+    .addCase(setDataLoading, (state, action) => {
+      state.isDataLoaded = action.payload;
     });
 });
 

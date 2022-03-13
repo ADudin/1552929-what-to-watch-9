@@ -13,7 +13,8 @@ import {
   loadFilm,
   loadSimilarFilms,
   loadReviews,
-  loadUserData
+  loadUserData,
+  sendReview
 } from './action';
 
 import {
@@ -33,6 +34,7 @@ import {Film} from '../types/film';
 import {Review} from '../types/review';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
+import {NewReview} from '../types/new-review';
 
 export const clearErrorAction = createAsyncThunk(
   'main/clearError',
@@ -150,6 +152,18 @@ export const fetchUserData = createAsyncThunk(
     try {
       const {data} = await api.get<UserData>(APIRoute.Login);
       store.dispatch(loadUserData(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const sendNewReviewAction = createAsyncThunk(
+  'data/sendNewReview',
+  async ({filmId, comment, rating}: NewReview) => {
+    try {
+      await api.post<NewReview>(`${APIRoute.Comments}${filmId}`, {comment, rating});
+      store.dispatch(sendReview(false));
     } catch (error) {
       errorHandle(error);
     }

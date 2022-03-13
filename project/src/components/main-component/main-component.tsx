@@ -3,6 +3,7 @@ import LogoComponent from '../logo-component/logo-component';
 import GenresListComponent from '../genres-list-component/genres-list-component';
 import ShowMoreButtonComponent from '../show-more-button-component/show-more-button-component';
 import UserBlockComponent from '../user-block-component/user-block-component';
+import LoadingScreen from '../loading-screen/loading-screen';
 
 import {
   useState,
@@ -18,17 +19,31 @@ import {
 
 import {State} from '../../types/state';
 import {DEFAULT_ACTIVE_GENRE} from '../../const';
-import {resetCountAction} from '../../store/action';
+
+import {
+  resetCountAction,
+  setDataLoading
+} from '../../store/action';
+
+import {fetchPromoFilmAction} from '../../store/api-actions';
 import {Film} from '../../types/film';
 
 function MainComponent(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(setDataLoading(true));
+    dispatch(fetchPromoFilmAction());
+  });
+
   const initialFilms = useAppSelector((state: State) => state.films);
   const activeGenre = useAppSelector((state: State) => state.activeGenre);
   const promoFilmCard = useAppSelector((state: State) => state.promoFilm);
+  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
+
   const filteredFilms = activeGenre === DEFAULT_ACTIVE_GENRE ? initialFilms : initialFilms.filter((film) => film.genre === activeGenre);
   const renderedFilmCardsCount = useAppSelector((state: State) => state.filmCardsCount);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const {
     id,
@@ -43,11 +58,14 @@ function MainComponent(): JSX.Element {
 
   useEffect(() => {
     setGenres([DEFAULT_ACTIVE_GENRE, ...new Set(initialFilms.map((film) => film.genre))]);
-  }, [initialFilms]);
-
-  useEffect(() => {
     dispatch(resetCountAction());
-  }, [dispatch]);
+  }, [dispatch, initialFilms]);
+
+  if (!isDataLoaded) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <>

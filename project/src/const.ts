@@ -72,3 +72,11 @@ export enum HTTP_CODE {
   UNAUTHORIZED = 401,
   NOT_FOUND = 404,
 }
+
+export enum TEXT_RATING {
+  BAD = 'Bad',
+  NORMAL = 'Normal',
+  GOOD = 'Good',
+  VERY_GOOD = 'Very good',
+  AWESOME = 'Awesome',
+}
