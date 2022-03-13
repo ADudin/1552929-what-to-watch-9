@@ -27,5 +27,3 @@ export const setError = createAction<string>('main/setError');
 export const loadUserData = createAction<UserData>('data/loadUserData');
 
 export const sendReview = createAction<boolean>('data/sendReview');
-
-export const setDataLoading = createAction<boolean>('data/setDataLoading');

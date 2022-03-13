@@ -12,8 +12,7 @@ import {
   loadSimilarFilms,
   loadReviews,
   loadUserData,
-  sendReview,
-  setDataLoading
+  sendReview
 } from './action';
 
 import {
@@ -100,9 +99,6 @@ const reducer = createReducer(initialState, (builder)=> {
     })
     .addCase(sendReview, (state, action) => {
       state.isDataSending = action.payload;
-    })
-    .addCase(setDataLoading, (state, action) => {
-      state.isDataLoaded = action.payload;
     });
 });
 

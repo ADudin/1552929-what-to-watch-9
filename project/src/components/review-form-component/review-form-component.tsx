@@ -1,5 +1,3 @@
-import LoadingScreen from '../loading-screen/loading-screen';
-
 import React, {
   useState,
   useEffect
@@ -22,10 +20,7 @@ import {
   sendNewReviewAction
 } from '../../store/api-actions';
 
-import {
-  sendReview,
-  setDataLoading
-} from '../../store/action';
+import {sendReview} from '../../store/action';
 
 function ReviewFormComponent(): JSX.Element {
   const params = useParams();
@@ -37,23 +32,15 @@ function ReviewFormComponent(): JSX.Element {
   const [isUserReviewRating, setIsUserReviewSetting] = useState<boolean>(false);
 
   useEffect(() => {
-    dispatch(setDataLoading(true));
     dispatch(fetchUserData());
-  }, [dispatch]);
+  });
 
   const isReviewSending = useAppSelector((state) => state.isDataSending);
-  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
 
   const userReviewRatingChangeHandler = (userRating: number) => {
     setUserReviewRating(userRating);
     setIsUserReviewSetting(true);
   };
-
-  if (!isDataLoaded) {
-    return (
-      <LoadingScreen />
-    );
-  }
 
   return (
     <div className="add-review">

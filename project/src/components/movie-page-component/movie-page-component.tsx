@@ -2,7 +2,6 @@ import LogoComponent from '../logo-component/logo-component';
 import MovieTabs from './tabs/movie-tabs';
 import FilmsListComponent from '../films-list-component/films-list-comonent';
 import UserBlockComponent from '../user-block-component/user-block-component';
-import LoadingScreen from '../loading-screen/loading-screen';
 
 import {Film} from '../../types/film';
 import {useEffect} from 'react';
@@ -25,15 +24,12 @@ import {
   fetchReviewsAction
 } from '../../store/api-actions';
 
-import {setDataLoading} from '../../store/action';
-
 function MoviePageComponent(): JSX.Element {
   const dispatch = useAppDispatch();
   const params = useParams();
   const filmId = Number(params.id);
 
   useEffect(() => {
-    dispatch(setDataLoading(true));
     dispatch(fetchFilmAction(filmId));
     dispatch(fetchSimilarFilmsAction(filmId));
     dispatch(fetchReviewsAction(filmId));
@@ -43,7 +39,6 @@ function MoviePageComponent(): JSX.Element {
   const film = useAppSelector((state) => state.film);
   const similarFilms = useAppSelector((state) => state.similarFilms);
   const reviews = useAppSelector((state) => state.reviews);
-  const isDataLoaded = useAppSelector((state) => state.isDataLoaded);
 
   const {
     id,
@@ -55,12 +50,6 @@ function MoviePageComponent(): JSX.Element {
   } = film as Film;
 
   const filteredSimilarFilms = similarFilms?.filter((item) => item.id !== filmId);
-
-  if (!isDataLoaded) {
-    return (
-      <LoadingScreen />
-    );
-  }
 
   return (
     <>
