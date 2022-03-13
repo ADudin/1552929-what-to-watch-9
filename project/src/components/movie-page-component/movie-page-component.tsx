@@ -3,17 +3,14 @@ import MovieTabs from './tabs/movie-tabs';
 import FilmsListComponent from '../films-list-component/films-list-comonent';
 import UserBlockComponent from '../user-block-component/user-block-component';
 import {Film} from '../../types/film';
-//import {Review} from '../../types/review';
+import {useEffect} from 'react';
 
 import {
   useParams,
   Link
 } from 'react-router-dom';
 
-import {
-  AuthorizationStatus,
-  AppRoute
-} from '../../const';
+import {AuthorizationStatus} from '../../const';
 
 import {useAppSelector} from '../../hooks/hooks';
 import {store} from '../../store/store';
@@ -23,15 +20,15 @@ import {
   fetchReviewsAction
 } from '../../store/api-actions';
 
-//const FILTERED_FILMS_COUNT = 4;
-
 function MoviePageComponent(): JSX.Element {
   const params = useParams();
   const filmId = Number(params.id);
 
-  store.dispatch(fetchFilmAction(filmId));
-  store.dispatch(fetchSimilarFilmsAction(filmId));
-  store.dispatch(fetchReviewsAction(filmId));
+  useEffect(() => {
+    store.dispatch(fetchFilmAction(filmId));
+    store.dispatch(fetchSimilarFilmsAction(filmId));
+    store.dispatch(fetchReviewsAction(filmId));
+  }, [filmId]);
 
   const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
   const film = useAppSelector((state) => state.film);
@@ -48,9 +45,6 @@ function MoviePageComponent(): JSX.Element {
   } = film as Film;
 
   const filteredSimilarFilms = similarFilms?.filter((item) => item.id !== filmId);
-
-  //const film: Film | undefined = films.find((item) => item.id === filmId);
-  //const filteredFilms: Film[] = films.filter((item) => item.genre === genre && item.id !== filmId);
 
   return (
     <>
@@ -89,7 +83,12 @@ function MoviePageComponent(): JSX.Element {
                   </svg>
                   <span>My list</span>
                 </button>
-                <Link to={authorizationStatus === AuthorizationStatus.Auth ? `/films/${id}/review` : AppRoute.SignIn} className="btn film-card__button">Add review</Link>
+                {
+                  authorizationStatus === AuthorizationStatus.Auth ?
+                    <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
+                    : ''
+                }
+
               </div>
             </div>
           </div>
@@ -113,7 +112,7 @@ function MoviePageComponent(): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
 
           <div className="catalog__films-list">
-            {<FilmsListComponent films = {filteredSimilarFilms/*.slice(0, FILTERED_FILMS_COUNT)*/} />}
+            {<FilmsListComponent films = {filteredSimilarFilms} />}
           </div>
         </section>
 

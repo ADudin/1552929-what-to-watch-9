@@ -1,5 +1,12 @@
-import React, {useState} from 'react';
+import React, {
+  useState,
+  useEffect
+} from 'react';
+
 import {RATING_VALUES} from '../../const';
+
+import {fetchUserData} from '../../store/api-actions';
+import { store } from '../../store/store';
 
 type ReviewFormComponentProps = {
   rating: number;
@@ -8,6 +15,10 @@ type ReviewFormComponentProps = {
 function ReviewFormComponent({rating}: ReviewFormComponentProps): JSX.Element {
   const [userReviewRating, setUserReviewRating] = useState<number>(rating);
   const [userComment, setUserComment] = useState('');
+
+  useEffect(() => {
+    store.dispatch(fetchUserData());
+  }, []);
 
   return (
     <div className="add-review">

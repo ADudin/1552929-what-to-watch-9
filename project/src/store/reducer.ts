@@ -10,7 +10,8 @@ import {
   loadPromoFilm,
   loadFilm,
   loadSimilarFilms,
-  loadReviews
+  loadReviews,
+  loadUserData
 } from './action';
 
 import {
@@ -22,6 +23,7 @@ import {
 
 import {Film} from '../types/film';
 import {Review} from '../types/review';
+import {UserData} from '../types/user-data';
 
 type InitialState = {
   activeGenre: string,
@@ -32,6 +34,7 @@ type InitialState = {
   promoFilm: Film | object,
   filmCardsCount: number,
   authorizationStatus: AuthorizationStatus,
+  userData: UserData | object,
   isDataLoaded: boolean,
   error: string,
 }
@@ -45,6 +48,7 @@ const initialState: InitialState = {
   promoFilm: {},
   filmCardsCount: FILM_CARDS_COUNT,
   authorizationStatus: AuthorizationStatus.Unknown,
+  userData: {},
   isDataLoaded: false,
   error: '',
 };
@@ -81,6 +85,9 @@ const reducer = createReducer(initialState, (builder)=> {
     })
     .addCase(loadReviews, (state, action) => {
       state.reviews = action.payload;
+    })
+    .addCase(loadUserData, (state, action) => {
+      state.userData = action.payload;
     });
 });
 

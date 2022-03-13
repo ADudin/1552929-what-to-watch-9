@@ -5,9 +5,6 @@ import {
   store
 } from '../store/store';
 
-import {Film} from '../types/film';
-import {Review} from '../types/review';
-
 import {
   loadFilms,
   requireAuthorization,
@@ -15,7 +12,8 @@ import {
   loadPromoFilm,
   loadFilm,
   loadSimilarFilms,
-  loadReviews
+  loadReviews,
+  loadUserData
 } from './action';
 
 import {
@@ -31,6 +29,8 @@ import {
   TIMEOUT_SHOW_ERROR
 } from '../const';
 
+import {Film} from '../types/film';
+import {Review} from '../types/review';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
 
@@ -138,6 +138,18 @@ export const logoutAction = createAsyncThunk(
       await api.delete(APIRoute.Logout);
       dropToken();
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchUserData = createAsyncThunk(
+  'data/fetchUserData',
+  async () => {
+    try {
+      const {data} = await api.get<UserData>(APIRoute.Login);
+      store.dispatch(loadUserData(data));
     } catch (error) {
       errorHandle(error);
     }
