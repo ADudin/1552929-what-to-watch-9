@@ -56,11 +56,11 @@ export const FILM_CARDS_COUNT_STEP = 8;
 
 export enum APIRoute {
   Films = '/films',
-  Film = '/films/:id',
-  SimilarFilm = '/films/:id/Similar',
+  Film = '/films/',
+  SimilarFilms = '/films/',
   PromoFilm = '/promo',
   Favorite = '/favorite',
-  Comments = '/comments/:id',
+  Comments = '/comments/',
   Login = '/login',
   Logout = '/logout',
 }
@@ -71,4 +71,12 @@ export enum HTTP_CODE {
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,
   NOT_FOUND = 404,
+}
+
+export enum TEXT_RATING {
+  BAD = 'Bad',
+  NORMAL = 'Normal',
+  GOOD = 'Good',
+  VERY_GOOD = 'Very good',
+  AWESOME = 'Awesome',
 }

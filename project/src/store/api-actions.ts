@@ -5,13 +5,16 @@ import {
   store
 } from '../store/store';
 
-import {Film} from '../types/film';
-
 import {
   loadFilms,
   requireAuthorization,
   setError,
-  loadPromoFilm
+  loadPromoFilm,
+  loadFilm,
+  loadSimilarFilms,
+  loadReviews,
+  loadUserData,
+  sendReview
 } from './action';
 
 import {
@@ -27,8 +30,11 @@ import {
   TIMEOUT_SHOW_ERROR
 } from '../const';
 
+import {Film} from '../types/film';
+import {Review} from '../types/review';
 import {AuthData} from '../types/auth-data';
 import {UserData} from '../types/user-data';
+import {NewReview} from '../types/new-review';
 
 export const clearErrorAction = createAsyncThunk(
   'main/clearError',
@@ -40,12 +46,48 @@ export const clearErrorAction = createAsyncThunk(
   },
 );
 
+export const fetchFilmAction = createAsyncThunk(
+  'data/fetchFilm',
+  async (filmId: number) => {
+    try {
+      const {data} = await api.get<Film>(`${APIRoute.Film}${filmId}`);
+      store.dispatch(loadFilm(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
 export const fetchFilmsAction = createAsyncThunk(
   'data/fetchFilms',
   async () => {
     try {
       const {data} = await api.get<Film[]>(APIRoute.Films);
       store.dispatch(loadFilms(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchSimilarFilmsAction = createAsyncThunk(
+  'data/fetchSimilarFilms',
+  async (filmId: number) => {
+    try {
+      const {data} = await api.get<Film[]>(`${APIRoute.SimilarFilms}${filmId}/similar`);
+      store.dispatch(loadSimilarFilms(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchReviewsAction = createAsyncThunk(
+  'data/fetchReviews',
+  async (filmId: number) => {
+    try {
+      const {data} = await api.get<Review[]>(`${APIRoute.Comments}${filmId}`);
+      store.dispatch(loadReviews(data));
     } catch (error) {
       errorHandle(error);
     }
@@ -98,6 +140,30 @@ export const logoutAction = createAsyncThunk(
       await api.delete(APIRoute.Logout);
       dropToken();
       store.dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchUserData = createAsyncThunk(
+  'data/fetchUserData',
+  async () => {
+    try {
+      const {data} = await api.get<UserData>(APIRoute.Login);
+      store.dispatch(loadUserData(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const sendNewReviewAction = createAsyncThunk(
+  'data/sendNewReview',
+  async ({filmId, comment, rating}: NewReview) => {
+    try {
+      await api.post<NewReview>(`${APIRoute.Comments}${filmId}`, {comment, rating});
+      store.dispatch(sendReview(false));
     } catch (error) {
       errorHandle(error);
     }

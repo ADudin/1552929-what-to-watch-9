@@ -1,4 +1,5 @@
 import {createReducer} from '@reduxjs/toolkit';
+
 import {
   setActiveGenre,
   incCountAction,
@@ -6,7 +7,12 @@ import {
   loadFilms,
   requireAuthorization,
   setError,
-  loadPromoFilm
+  loadPromoFilm,
+  loadFilm,
+  loadSimilarFilms,
+  loadReviews,
+  loadUserData,
+  sendReview
 } from './action';
 
 import {
@@ -15,25 +21,38 @@ import {
   FILM_CARDS_COUNT_STEP,
   AuthorizationStatus
 } from '../const';
+
 import {Film} from '../types/film';
+import {Review} from '../types/review';
+import {UserData} from '../types/user-data';
 
 type InitialState = {
   activeGenre: string,
+  film: Film | object,
   films: Film[],
+  similarFilms: Film[],
+  reviews: Review[],
   promoFilm: Film | object,
   filmCardsCount: number,
   authorizationStatus: AuthorizationStatus,
+  userData: UserData | object,
   isDataLoaded: boolean,
+  isDataSending: boolean,
   error: string,
 }
 
 const initialState: InitialState = {
   activeGenre: DEFAULT_ACTIVE_GENRE,
+  film: {},
   films: [],
+  similarFilms: [],
+  reviews: [],
   promoFilm: {},
   filmCardsCount: FILM_CARDS_COUNT,
   authorizationStatus: AuthorizationStatus.Unknown,
+  userData: {},
   isDataLoaded: false,
+  isDataSending: false,
   error: '',
 };
 
@@ -60,6 +79,26 @@ const reducer = createReducer(initialState, (builder)=> {
     })
     .addCase(loadPromoFilm, (state, action) => {
       state.promoFilm = action.payload;
+      state.isDataLoaded = true;
+    })
+    .addCase(loadFilm, (state, action) =>{
+      state.film = action.payload;
+      state.isDataLoaded = true;
+    })
+    .addCase(loadSimilarFilms, (state, action) => {
+      state.similarFilms = action.payload;
+      state.isDataLoaded = true;
+    })
+    .addCase(loadReviews, (state, action) => {
+      state.reviews = action.payload;
+      state.isDataLoaded = true;
+    })
+    .addCase(loadUserData, (state, action) => {
+      state.userData = action.payload;
+      state.isDataLoaded = true;
+    })
+    .addCase(sendReview, (state, action) => {
+      state.isDataSending = action.payload;
     });
 });
 

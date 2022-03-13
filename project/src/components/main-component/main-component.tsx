@@ -18,17 +18,27 @@ import {
 
 import {State} from '../../types/state';
 import {DEFAULT_ACTIVE_GENRE} from '../../const';
+
 import {resetCountAction} from '../../store/action';
+
+import {fetchPromoFilmAction} from '../../store/api-actions';
 import {Film} from '../../types/film';
 
 function MainComponent(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(fetchPromoFilmAction());
+  });
+
   const initialFilms = useAppSelector((state: State) => state.films);
   const activeGenre = useAppSelector((state: State) => state.activeGenre);
   const promoFilmCard = useAppSelector((state: State) => state.promoFilm);
+
+
   const filteredFilms = activeGenre === DEFAULT_ACTIVE_GENRE ? initialFilms : initialFilms.filter((film) => film.genre === activeGenre);
   const renderedFilmCardsCount = useAppSelector((state: State) => state.filmCardsCount);
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const {
     id,
@@ -43,11 +53,8 @@ function MainComponent(): JSX.Element {
 
   useEffect(() => {
     setGenres([DEFAULT_ACTIVE_GENRE, ...new Set(initialFilms.map((film) => film.genre))]);
-  }, [initialFilms]);
-
-  useEffect(() => {
     dispatch(resetCountAction());
-  }, [dispatch]);
+  }, [dispatch, initialFilms]);
 
   return (
     <>
