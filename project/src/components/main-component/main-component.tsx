@@ -1,14 +1,8 @@
-import FilmsListComponent from '../films-list-component/films-list-comonent';
 import LogoComponent from '../logo-component/logo-component';
-import GenresListComponent from '../genres-list-component/genres-list-component';
-import ShowMoreButtonComponent from '../show-more-button-component/show-more-button-component';
 import UserBlockComponent from '../user-block-component/user-block-component';
+import CatalogComponent from '../catalog-component/catalog-component';
 
-import {
-  useState,
-  useEffect
-} from 'react';
-
+import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 import {
@@ -17,10 +11,6 @@ import {
 } from '../../hooks/hooks';
 
 import {State} from '../../types/state';
-import {DEFAULT_ACTIVE_GENRE} from '../../const';
-
-import {resetCountAction} from '../../store/action';
-
 import {fetchPromoFilmAction} from '../../store/api-actions';
 import {Film} from '../../types/film';
 
@@ -30,15 +20,9 @@ function MainComponent(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchPromoFilmAction());
-  });
+  }, [dispatch]);
 
-  const initialFilms = useAppSelector((state: State) => state.films);
-  const activeGenre = useAppSelector((state: State) => state.activeGenre);
   const promoFilmCard = useAppSelector((state: State) => state.promoFilm);
-
-
-  const filteredFilms = activeGenre === DEFAULT_ACTIVE_GENRE ? initialFilms : initialFilms.filter((film) => film.genre === activeGenre);
-  const renderedFilmCardsCount = useAppSelector((state: State) => state.filmCardsCount);
 
   const {
     id,
@@ -48,13 +32,6 @@ function MainComponent(): JSX.Element {
     posterImage,
     backgroundImage,
   } = promoFilmCard as Film;
-
-  const [genres, setGenres] = useState<string[]>([]);
-
-  useEffect(() => {
-    setGenres([DEFAULT_ACTIVE_GENRE, ...new Set(initialFilms.map((film) => film.genre))]);
-    dispatch(resetCountAction());
-  }, [dispatch, initialFilms]);
 
   return (
     <>
@@ -108,21 +85,7 @@ function MainComponent(): JSX.Element {
       </section>
 
       <div className="page-content">
-        <section className="catalog">
-          <h2 className="catalog__title visually-hidden">Catalog</h2>
-
-          <ul className="catalog__genres-list">
-            <GenresListComponent genres = {genres} />
-          </ul>
-
-          <div className="catalog__films-list">
-            <FilmsListComponent films = {filteredFilms.slice(0, renderedFilmCardsCount)} />
-          </div>
-
-          <div className="catalog__more">
-            {filteredFilms.length > renderedFilmCardsCount ? <ShowMoreButtonComponent /> : ''}
-          </div>
-        </section>
+        <CatalogComponent />
 
         <footer className="page-footer">
           <LogoComponent />
