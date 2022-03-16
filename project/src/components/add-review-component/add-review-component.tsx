@@ -25,7 +25,7 @@ function AddReviewComponent({films}: AddReviewComponentProps): JSX.Element {
   const navigate = useNavigate();
   const film = films.find((item) => item.id === Number(params.id));
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
 
   useEffect(() => {
     if (authorizationStatus !== AuthorizationStatus.Auth) {

@@ -35,10 +35,14 @@ function MoviePageComponent(): JSX.Element {
     dispatch(fetchReviewsAction(filmId));
   }, [dispatch, filmId]);
 
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const film = useAppSelector((state) => state.film);
-  const similarFilms = useAppSelector((state) => state.similarFilms);
-  const reviews = useAppSelector((state) => state.reviews);
+  const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
+
+  const {
+    film,
+    similarFilms,
+    reviews,
+  } = useAppSelector(({DATA}) => DATA);
+
 
   const {
     id,

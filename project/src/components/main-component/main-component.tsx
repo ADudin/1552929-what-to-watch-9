@@ -10,7 +10,6 @@ import {
   useAppDispatch
 } from '../../hooks/hooks';
 
-import {State} from '../../types/state';
 import {fetchPromoFilmAction} from '../../store/api-actions';
 import {Film} from '../../types/film';
 
@@ -22,7 +21,7 @@ function MainComponent(): JSX.Element {
     dispatch(fetchPromoFilmAction());
   }, [dispatch]);
 
-  const promoFilmCard = useAppSelector((state: State) => state.promoFilm);
+  const promoFilmCard = useAppSelector(({DATA}) => DATA.promoFilm);
 
   const {
     id,

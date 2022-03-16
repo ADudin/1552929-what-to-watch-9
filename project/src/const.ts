@@ -80,3 +80,9 @@ export enum TEXT_RATING {
   VERY_GOOD = 'Very good',
   AWESOME = 'Awesome',
 }
+
+export enum NameSpace {
+  data = 'DATA',
+  film = 'FILM',
+  user = 'USER',
+}

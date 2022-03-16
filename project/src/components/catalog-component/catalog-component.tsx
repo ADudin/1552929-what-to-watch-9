@@ -12,19 +12,21 @@ import {
   useAppSelector
 } from '../../hooks/hooks';
 
-import {resetCountAction} from '../../store/action';
+import {resetCountAction} from '../../store/film-process/film-process';
 
-import {State} from '../../types/state';
 import {DEFAULT_ACTIVE_GENRE} from '../../const';
 
 function CatalogComponent(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  const initialFilms = useAppSelector((state: State) => state.films);
-  const activeGenre = useAppSelector((state: State) => state.activeGenre);
+  const initialFilms = useAppSelector(({DATA}) => DATA.films);
+  const {
+    activeGenre,
+    filmCardsCount,
+  } = useAppSelector(({FILM}) => FILM);
 
   const filteredFilms = activeGenre === DEFAULT_ACTIVE_GENRE ? initialFilms : initialFilms.filter((film) => film.genre === activeGenre);
-  const renderedFilmCardsCount = useAppSelector((state: State) => state.filmCardsCount);
+
 
   const [genres, setGenres] = useState<string[]>([]);
 
@@ -42,11 +44,11 @@ function CatalogComponent(): JSX.Element {
       </ul>
 
       <div className="catalog__films-list">
-        <FilmsListComponent films = {filteredFilms.slice(0, renderedFilmCardsCount)} />
+        <FilmsListComponent films = {filteredFilms.slice(0, filmCardsCount)} />
       </div>
 
       <div className="catalog__more">
-        {filteredFilms.length > renderedFilmCardsCount ? <ShowMoreButtonComponent /> : ''}
+        {filteredFilms.length > filmCardsCount ? <ShowMoreButtonComponent /> : ''}
       </div>
     </section>
   );

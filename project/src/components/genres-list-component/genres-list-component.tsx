@@ -1,9 +1,10 @@
 import {useAppDispatch, useAppSelector} from '../../hooks/hooks';
-import {State} from '../../types/state';
+
 import {
   setActiveGenre,
   resetCountAction
-} from '../../store/action';
+} from '../../store/film-process/film-process';
+
 import {Link} from 'react-router-dom';
 
 type GenresListComponentProps = {
@@ -11,7 +12,7 @@ type GenresListComponentProps = {
 }
 
 function GenresListComponent({genres}: GenresListComponentProps): JSX.Element {
-  const activeGenre = useAppSelector((state: State) => state.activeGenre);
+  const activeGenre = useAppSelector(({FILM}) => FILM.activeGenre);
   const dispatch = useAppDispatch();
 
   return (
