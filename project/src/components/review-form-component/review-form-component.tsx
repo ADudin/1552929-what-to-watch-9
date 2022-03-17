@@ -20,7 +20,7 @@ import {
   sendNewReviewAction
 } from '../../store/api-actions';
 
-import {sendReview} from '../../store/action';
+import {sendReview} from '../../store/film-data/film-data';
 
 function ReviewFormComponent(): JSX.Element {
   const params = useParams();
@@ -35,7 +35,7 @@ function ReviewFormComponent(): JSX.Element {
     dispatch(fetchUserData());
   });
 
-  const isReviewSending = useAppSelector((state) => state.isDataSending);
+  const isReviewSending = useAppSelector(({DATA}) => DATA.isDataSending);
 
   const userReviewRatingChangeHandler = (userRating: number) => {
     setUserReviewRating(userRating);

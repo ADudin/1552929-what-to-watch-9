@@ -7,15 +7,18 @@ import {
 
 import {
   loadFilms,
-  requireAuthorization,
   setError,
   loadPromoFilm,
   loadFilm,
   loadSimilarFilms,
   loadReviews,
-  loadUserData,
   sendReview
-} from './action';
+} from './film-data/film-data';
+
+import {
+  requireAuthorization,
+  loadUserData
+} from './user-process/user-process';
 
 import {
   saveToken,

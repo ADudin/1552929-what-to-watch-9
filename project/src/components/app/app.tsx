@@ -22,8 +22,12 @@ import LoadingScreen from '../loading-screen/loading-screen';
 import PrivatRoute from '../private-route/private-route';
 
 function App(): JSX.Element {
-  const {authorizationStatus, isDataLoaded} = useAppSelector((state) => state);
-  const films = useAppSelector((state) => state.films);
+  const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
+
+  const {
+    films,
+    isDataLoaded,
+  } = useAppSelector(({DATA}) => DATA);
 
   if (!isDataLoaded) {
     return (

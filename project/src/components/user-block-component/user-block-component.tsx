@@ -17,7 +17,7 @@ import {logoutAction} from '../../store/api-actions';
 function UserBlockComponent(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
 
   return (
     <ul className="user-block">
