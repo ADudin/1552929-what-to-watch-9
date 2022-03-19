@@ -64,7 +64,7 @@ function App(): JSX.Element {
         />
         <Route
           path={AppRoute.Player}
-          element={<PlayerComponent films= {films} />}
+          element={<PlayerComponent />}
         />
         <Route
           path="*"
