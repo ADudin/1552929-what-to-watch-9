@@ -50,7 +50,7 @@ function App(): JSX.Element {
           path={AppRoute.MyList}
           element={
             <PrivatRoute authorizationStatus={authorizationStatus}>
-              <MyListComponent films = {films} />
+              <MyListComponent />
             </PrivatRoute>
           }
         />

@@ -11,6 +11,8 @@ import {
   loadPromoFilm,
   loadFilm,
   loadSimilarFilms,
+  loadFavorite,
+  changeFavoriteStatus,
   loadReviews,
   sendReview
 } from './film-data/film-data';
@@ -79,6 +81,18 @@ export const fetchSimilarFilmsAction = createAsyncThunk(
     try {
       const {data} = await api.get<Film[]>(`${APIRoute.SimilarFilms}${filmId}/similar`);
       store.dispatch(loadSimilarFilms(data));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const fetchFavoriteAction = createAsyncThunk(
+  'data/fetchFavoriteFilms',
+  async () => {
+    try {
+      const {data} = await api.get<Film[]>(APIRoute.Favorite);
+      store.dispatch(loadFavorite(data));
     } catch (error) {
       errorHandle(error);
     }
@@ -167,6 +181,20 @@ export const sendNewReviewAction = createAsyncThunk(
     try {
       await api.post<NewReview>(`${APIRoute.Comments}${filmId}`, {comment, rating});
       store.dispatch(sendReview(false));
+    } catch (error) {
+      errorHandle(error);
+    }
+  },
+);
+
+export const changeFavoriteStatusAction = createAsyncThunk(
+  'data/changeFavoriteFilmStatus',
+  async ({filmId, status}: {filmId: number, status: number}) => {
+    try {
+      await api.post<Film>(`${APIRoute.Favorite}/${filmId}/${status}`);
+      store.dispatch(fetchPromoFilmAction());
+      store.dispatch(fetchFilmAction(filmId));
+      store.dispatch(changeFavoriteStatus(false));
     } catch (error) {
       errorHandle(error);
     }

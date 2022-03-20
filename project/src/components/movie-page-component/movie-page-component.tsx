@@ -2,6 +2,7 @@ import LogoComponent from '../logo-component/logo-component';
 import MovieTabs from './tabs/movie-tabs';
 import FilmsListComponent from '../films-list-component/films-list-comonent';
 import UserBlockComponent from '../user-block-component/user-block-component';
+import FavoriteButtonComponent from '../favorite-button-component/favorite-button-component';
 
 import {Film} from '../../types/film';
 import {useEffect} from 'react';
@@ -53,6 +54,7 @@ function MoviePageComponent(): JSX.Element {
     backgroundImage,
     genre,
     released,
+    isFavorite,
   } = film as Film;
 
   const filteredSimilarFilms = similarFilms?.filter((item) => item.id !== filmId);
@@ -92,18 +94,12 @@ function MoviePageComponent(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <FavoriteButtonComponent id = {id} isFavorite = {isFavorite} />
                 {
                   authorizationStatus === AuthorizationStatus.Auth ?
                     <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
                     : ''
                 }
-
               </div>
             </div>
           </div>

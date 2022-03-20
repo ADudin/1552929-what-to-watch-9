@@ -30,4 +30,8 @@ export const filmProcess = createSlice({
   },
 });
 
-export const {setActiveGenre, incCountAction, resetCountAction} = filmProcess.actions;
+export const {
+  setActiveGenre,
+  incCountAction,
+  resetCountAction,
+} = filmProcess.actions;
