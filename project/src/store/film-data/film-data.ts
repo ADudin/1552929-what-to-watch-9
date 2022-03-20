@@ -6,6 +6,7 @@ const initialState: FilmData = {
   film: {},
   films: [],
   similarFilms: [],
+  favorite: [],
   reviews: [],
   promoFilm: {},
   isDataLoaded: false,
@@ -33,6 +34,12 @@ export const filmData = createSlice({
     loadSimilarFilms: (state, action) => {
       state.similarFilms = action.payload;
     },
+    loadFavorite: (state, action) => {
+      state.favorite = action.payload;
+    },
+    changeFavoriteStatus: (state, action) => {
+      state.isDataSending = action.payload;
+    },
     loadReviews: (state, action) => {
       state.reviews = action.payload;
     },
@@ -48,6 +55,8 @@ export const {
   loadPromoFilm,
   loadFilm,
   loadSimilarFilms,
+  loadFavorite,
+  changeFavoriteStatus,
   loadReviews,
   sendReview,
 } = filmData.actions;

@@ -1,6 +1,7 @@
-import LogoComponent from '../logo-component/logo-component';
-import UserBlockComponent from '../user-block-component/user-block-component';
-import CatalogComponent from '../catalog-component/catalog-component';
+import LogoComponent from '../../components/logo-component/logo-component';
+import UserBlockComponent from '../../components/user-block-component/user-block-component';
+import CatalogComponent from '../../components/catalog-component/catalog-component';
+import FavoriteButtonComponent from '../../components/favorite-button-component/favorite-button-component';
 
 import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
@@ -30,6 +31,7 @@ function MainComponent(): JSX.Element {
     released,
     posterImage,
     backgroundImage,
+    isFavorite,
   } = promoFilmCard as Film;
 
   return (
@@ -71,12 +73,7 @@ function MainComponent(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <FavoriteButtonComponent id = {id} isFavorite = {isFavorite} />
               </div>
             </div>
           </div>

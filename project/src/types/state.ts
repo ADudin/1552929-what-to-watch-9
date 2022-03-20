@@ -18,6 +18,7 @@ export type FilmData = {
   film: Film | object,
   films: Film[],
   similarFilms: Film[],
+  favorite: Film[],
   reviews: Review[],
   promoFilm: Film | object,
   error: string,

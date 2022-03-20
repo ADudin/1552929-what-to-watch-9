@@ -1,12 +1,24 @@
-import LogoComponent from '../logo-component/logo-component';
-import {Film} from '../../types/film';
-import FilmsListComponent from '../films-list-component/films-list-comonent';
+import LogoComponent from '../../components/logo-component/logo-component';
+import FilmsListComponent from '../../components/films-list-component/films-list-comonent';
 
-type MyListComponentProps = {
-  films: Film[],
-}
+import {useEffect} from 'react';
 
-function MyListComponent({films}: MyListComponentProps): JSX.Element {
+import {
+  useAppSelector,
+  useAppDispatch
+} from '../../hooks/hooks';
+
+import {fetchFavoriteAction} from '../../store/api-actions';
+
+function MyListComponent(): JSX.Element {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(fetchFavoriteAction());
+  }, [dispatch]);
+
+  const favoriteFilms = useAppSelector(({DATA}) => DATA.favorite);
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
@@ -30,7 +42,12 @@ function MyListComponent({films}: MyListComponentProps): JSX.Element {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__films-list">
-          <FilmsListComponent films = {films} />
+          {
+            favoriteFilms.length === 0 ?
+              <p>There are no any favorite films in list.</p> :
+              ''
+          }
+          <FilmsListComponent films = {favoriteFilms} />
         </div>
       </section>
 

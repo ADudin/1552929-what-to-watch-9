@@ -1,14 +1,16 @@
-import LogoComponent from '../logo-component/logo-component';
+import LogoComponent from '../../components/logo-component/logo-component';
 import MovieTabs from './tabs/movie-tabs';
-import FilmsListComponent from '../films-list-component/films-list-comonent';
-import UserBlockComponent from '../user-block-component/user-block-component';
+import FilmsListComponent from '../../components/films-list-component/films-list-comonent';
+import UserBlockComponent from '../../components/user-block-component/user-block-component';
+import FavoriteButtonComponent from '../../components/favorite-button-component/favorite-button-component';
 
 import {Film} from '../../types/film';
 import {useEffect} from 'react';
 
 import {
   useParams,
-  Link
+  Link,
+  useNavigate
 } from 'react-router-dom';
 
 import {AuthorizationStatus} from '../../const';
@@ -25,6 +27,7 @@ import {
 } from '../../store/api-actions';
 
 function MoviePageComponent(): JSX.Element {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const params = useParams();
   const filmId = Number(params.id);
@@ -51,6 +54,7 @@ function MoviePageComponent(): JSX.Element {
     backgroundImage,
     genre,
     released,
+    isFavorite,
   } = film as Film;
 
   const filteredSimilarFilms = similarFilms?.filter((item) => item.id !== filmId);
@@ -80,24 +84,22 @@ function MoviePageComponent(): JSX.Element {
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button
+                  className="btn btn--play film-card__button"
+                  type="button"
+                  onClick = {() => navigate(`/player/${id}`)}
+                >
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                </button>
+                <FavoriteButtonComponent id = {id} isFavorite = {isFavorite} />
                 {
                   authorizationStatus === AuthorizationStatus.Auth ?
                     <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>
                     : ''
                 }
-
               </div>
             </div>
           </div>

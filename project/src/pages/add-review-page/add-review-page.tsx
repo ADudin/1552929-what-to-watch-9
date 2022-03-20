@@ -5,9 +5,9 @@ import {
 } from 'react-router-dom';
 
 import {Film} from '../../types/film';
-import LogoComponent from '../logo-component/logo-component';
-import UserBlockComponent from '../user-block-component/user-block-component';
-import ReviewFormComponent from '../review-form-component/review-form-component';
+import LogoComponent from '../../components/logo-component/logo-component';
+import UserBlockComponent from '../../components/user-block-component/user-block-component';
+import ReviewFormComponent from '../../components/review-form-component/review-form-component';
 import {useAppSelector} from '../../hooks/hooks';
 import {useEffect} from 'react';
 import {

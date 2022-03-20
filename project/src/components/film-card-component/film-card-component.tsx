@@ -1,6 +1,6 @@
 import {Film} from '../../types/film';
 import {Link} from 'react-router-dom';
-import VideoPlayerComponent from '../video-player-component/video-player-component';
+import VideoPlayerComponent from '../preview-video-component/preview-video-component';
 import {useState} from 'react';
 
 type FilmCardComponentProps = {

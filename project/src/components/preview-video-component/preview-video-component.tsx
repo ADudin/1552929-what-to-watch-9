@@ -3,12 +3,14 @@ import {Film} from '../../types/film';
 
 type VideoPlayerComponentProps = {
   isPlaying: boolean;
-  film: Film;
+  film: Film | object;
 }
 
 function VideoPlayerComponent ({isPlaying, film}: VideoPlayerComponentProps): JSX.Element {
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  const {posterImage, previewVideoLink, previewImage} = film as Film;
 
   useEffect (() => {
     if (videoRef.current === null) {
@@ -23,13 +25,13 @@ function VideoPlayerComponent ({isPlaying, film}: VideoPlayerComponentProps): JS
     videoRef.current.pause();
     videoRef.current.currentTime = 0;
     videoRef.current.load();
-  }, [isPlaying, film.posterImage]);
+  }, [isPlaying, posterImage]);
 
   return (
     <video
       ref = {videoRef}
-      src = {film.previewVideoLink}
-      poster = {film.previewImage}
+      src = {previewVideoLink}
+      poster = {previewImage}
       width = "100%"
       height = "100%"
       muted
