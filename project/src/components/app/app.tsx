@@ -10,12 +10,12 @@ import {
   AppRoute
 } from '../../const';
 
-import MainComponent from '../main-component/main-component';
-import SignInComponent from '../sign-in-component/sign-in-component';
-import MyListComponent from '../my-list-component/my-list-component';
-import MoviePageComponent from '../movie-page-component/movie-page-component';
-import AddReviewComponent from '../add-review-component/add-review-component';
-import PlayerComponent from '../player-component/player-component';
+import MainComponent from '../../pages/main-page/main-page';
+import SignInComponent from '../../pages/sign-in-page/sign-in-page';
+import MyListComponent from '../../pages/my-list-page/my-list-page';
+import MoviePageComponent from '../../pages/movie-page/movie-page';
+import AddReviewComponent from '../../pages/add-review-page/add-review-page';
+import PlayerComponent from '../../pages/player-page/player-page';
 import NotFoundComponent from '../not-found-component/not-found-component';
 import LoadingScreen from '../loading-screen/loading-screen';
 

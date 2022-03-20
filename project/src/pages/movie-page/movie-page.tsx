@@ -1,8 +1,8 @@
-import LogoComponent from '../logo-component/logo-component';
+import LogoComponent from '../../components/logo-component/logo-component';
 import MovieTabs from './tabs/movie-tabs';
-import FilmsListComponent from '../films-list-component/films-list-comonent';
-import UserBlockComponent from '../user-block-component/user-block-component';
-import FavoriteButtonComponent from '../favorite-button-component/favorite-button-component';
+import FilmsListComponent from '../../components/films-list-component/films-list-comonent';
+import UserBlockComponent from '../../components/user-block-component/user-block-component';
+import FavoriteButtonComponent from '../../components/favorite-button-component/favorite-button-component';
 
 import {Film} from '../../types/film';
 import {useEffect} from 'react';

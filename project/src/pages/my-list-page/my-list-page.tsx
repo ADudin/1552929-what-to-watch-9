@@ -1,5 +1,5 @@
-import LogoComponent from '../logo-component/logo-component';
-import FilmsListComponent from '../films-list-component/films-list-comonent';
+import LogoComponent from '../../components/logo-component/logo-component';
+import FilmsListComponent from '../../components/films-list-component/films-list-comonent';
 
 import {useEffect} from 'react';
 

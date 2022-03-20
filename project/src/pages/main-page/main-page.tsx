@@ -1,7 +1,7 @@
-import LogoComponent from '../logo-component/logo-component';
-import UserBlockComponent from '../user-block-component/user-block-component';
-import CatalogComponent from '../catalog-component/catalog-component';
-import FavoriteButtonComponent from '../favorite-button-component/favorite-button-component';
+import LogoComponent from '../../components/logo-component/logo-component';
+import UserBlockComponent from '../../components/user-block-component/user-block-component';
+import CatalogComponent from '../../components/catalog-component/catalog-component';
+import FavoriteButtonComponent from '../../components/favorite-button-component/favorite-button-component';
 
 import {useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';

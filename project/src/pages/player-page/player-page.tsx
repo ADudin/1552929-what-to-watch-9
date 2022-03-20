@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import duration from 'dayjs/plugin/duration';
 
-import LoadingScreen from '../loading-screen/loading-screen';
+import LoadingScreen from '../../components/loading-screen/loading-screen';
 
 import {
   useEffect,
