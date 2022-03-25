@@ -129,7 +129,7 @@ describe('Reducer: filmData', () => {
       error: '',
     };
 
-    expect(filmData.reducer(state, changeFavoriteStatus(!fakeFilm.isFavorite)))
+    expect(filmData.reducer(state, changeFavoriteStatus(false)))
       .toEqual({
         film: fakeFilm,
         films: [],
@@ -158,7 +158,7 @@ describe('Reducer: filmData', () => {
       });
   });
 
-  it('should update review by send review', () => {
+  it('should update isDataSending state by send review', () => {
     const state = {
       film: {},
       films: [],
