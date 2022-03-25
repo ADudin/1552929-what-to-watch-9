@@ -21,7 +21,6 @@ import {
 const fakeFilm = makeFakeFilmData();
 const fakeFilms = [makeFakeFilmData(), makeFakeFilmData()];
 const fakeError = makeFakeMessage();
-const fakeReview = makeFakeReview();
 const fakeReviews = [makeFakeReview(), makeFakeReview()];
 
 const initialState = {
@@ -160,7 +159,19 @@ describe('Reducer: filmData', () => {
   });
 
   it('should update review by send review', () => {
-    expect(filmData.reducer(initialState, sendReview(fakeReview)))
+    const state = {
+      film: {},
+      films: [],
+      similarFilms: [],
+      favorite: [],
+      reviews: [],
+      promoFilm: {},
+      isDataLoaded: false,
+      isDataSending: true,
+      error: '',
+    };
+
+    expect(filmData.reducer(state, sendReview(false)))
       .toEqual({
         film: {},
         films: [],
@@ -169,7 +180,7 @@ describe('Reducer: filmData', () => {
         reviews: [],
         promoFilm: {},
         isDataLoaded: false,
-        isDataSending: fakeReview, // уточнить про это поведение, я ожидал тут будево значение
+        isDataSending: false,
         error: '',
       });
   });
