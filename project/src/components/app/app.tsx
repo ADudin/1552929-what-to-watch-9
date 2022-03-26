@@ -1,6 +1,5 @@
 import {
   Route,
-  BrowserRouter,
   Routes
 } from 'react-router-dom';
 
@@ -36,42 +35,40 @@ function App(): JSX.Element {
   }
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route
-          path={AppRoute.Main}
-          element={<MainComponent />}
-        />
-        <Route
-          path={AppRoute.SignIn}
-          element={<SignInComponent />}
-        />
-        <Route
-          path={AppRoute.MyList}
-          element={
-            <PrivatRoute authorizationStatus={authorizationStatus}>
-              <MyListComponent />
-            </PrivatRoute>
-          }
-        />
-        <Route
-          path={AppRoute.Film}
-          element={<MoviePageComponent />}
-        />
-        <Route
-          path={AppRoute.AddReview}
-          element={<AddReviewComponent films = {films} />}
-        />
-        <Route
-          path={AppRoute.Player}
-          element={<PlayerComponent />}
-        />
-        <Route
-          path="*"
-          element={<NotFoundComponent />}
-        />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route
+        path={AppRoute.Main}
+        element={<MainComponent />}
+      />
+      <Route
+        path={AppRoute.SignIn}
+        element={<SignInComponent />}
+      />
+      <Route
+        path={AppRoute.MyList}
+        element={
+          <PrivatRoute authorizationStatus={authorizationStatus}>
+            <MyListComponent />
+          </PrivatRoute>
+        }
+      />
+      <Route
+        path={AppRoute.Film}
+        element={<MoviePageComponent />}
+      />
+      <Route
+        path={AppRoute.AddReview}
+        element={<AddReviewComponent films = {films} />}
+      />
+      <Route
+        path={AppRoute.Player}
+        element={<PlayerComponent />}
+      />
+      <Route
+        path="*"
+        element={<NotFoundComponent />}
+      />
+    </Routes>
   );
 }
 

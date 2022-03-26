@@ -12,6 +12,7 @@ import {
   useAppSelector,
   useAppDispatch
 } from '../../hooks/hooks';
+
 import {logoutAction} from '../../store/api-actions';
 
 function UserBlockComponent(): JSX.Element {
@@ -32,6 +33,7 @@ function UserBlockComponent(): JSX.Element {
                   width="63"
                   height="63"
                   onClick = {() => navigate(AppRoute.MyList)}
+                  data-testid = 'user-block__avatar'
                 />
               </div>
             </li>

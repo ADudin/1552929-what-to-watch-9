@@ -16,6 +16,7 @@ function ErrorMessage(): JSX.Element | null {
           borderRadius: '5px',
           zIndex: 100,
         }}
+        data-testid = 'error-message'
       >
         {error}
       </div>
