@@ -6,11 +6,6 @@ import {
   State
 } from '../types/state';
 
-/*import {
-  api,
-  store
-} from '../store/store';*/
-
 import {
   loadFilms,
   setError,
