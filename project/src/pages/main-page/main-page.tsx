@@ -14,7 +14,7 @@ import {
 import {fetchPromoFilmAction} from '../../store/api-actions';
 import {Film} from '../../types/film';
 
-function MainComponent(): JSX.Element {
+function MainPage(): JSX.Element {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -95,4 +95,4 @@ function MainComponent(): JSX.Element {
   );
 }
 
-export default MainComponent;
+export default MainPage;

@@ -3,7 +3,7 @@ import {store} from '../store/store';
 import {setError} from '../store/film-data/film-data';
 import {clearErrorAction} from '../store/api-actions';
 import {ErrorType} from '../types/error';
-import {HTTP_CODE} from '../const';
+import {HttpCode} from '../const';
 
 export const errorHandle = (error: ErrorType): void => {
   if (!request.isAxiosError(error)) {
@@ -19,13 +19,13 @@ export const errorHandle = (error: ErrorType): void => {
 
   if (response) {
     switch (response.status) {
-      case HTTP_CODE.BAD_REQUEST:
+      case HttpCode.BAD_REQUEST:
         handleError(response.data.error);
         break;
-      case HTTP_CODE.NOT_FOUND:
+      case HttpCode.NOT_FOUND:
         handleError(response.data.error);
         break;
-      case HTTP_CODE.UNAUTHORIZED:
+      case HttpCode.UNAUTHORIZED:
         handleError(response.data.error);
         break;
     }

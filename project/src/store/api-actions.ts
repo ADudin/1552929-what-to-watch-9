@@ -31,7 +31,7 @@ import {
 import {errorHandle} from '../services/error-handle';
 
 import {
-  APIRoute,
+  ApiRoute,
   AuthorizationStatus,
   TIMEOUT_SHOW_ERROR
 } from '../const';
@@ -64,7 +64,7 @@ export const fetchFilmAction = createAsyncThunk<void, number, {
   'data/fetchFilm',
   async (filmId, {dispatch, extra: api}) => {
     try {
-      const {data} = await api.get<Film>(`${APIRoute.Film}${filmId}`);
+      const {data} = await api.get<Film>(`${ApiRoute.Film}${filmId}`);
       dispatch(loadFilm(data));
     } catch (error) {
       errorHandle(error);
@@ -80,7 +80,7 @@ export const fetchFilmsAction = createAsyncThunk<void, undefined, {
   'data/fetchFilms',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      const {data} = await api.get<Film[]>(APIRoute.Films);
+      const {data} = await api.get<Film[]>(ApiRoute.Films);
       dispatch(loadFilms(data));
     } catch (error) {
       errorHandle(error);
@@ -96,7 +96,7 @@ export const fetchSimilarFilmsAction = createAsyncThunk<void, number, {
   'data/fetchSimilarFilms',
   async (filmId, {dispatch, extra: api}) => {
     try {
-      const {data} = await api.get<Film[]>(`${APIRoute.SimilarFilms}${filmId}/similar`);
+      const {data} = await api.get<Film[]>(`${ApiRoute.SimilarFilms}${filmId}/similar`);
       dispatch(loadSimilarFilms(data));
     } catch (error) {
       errorHandle(error);
@@ -112,7 +112,7 @@ export const fetchFavoriteAction = createAsyncThunk<void, undefined, {
   'data/fetchFavoriteFilms',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      const {data} = await api.get<Film[]>(APIRoute.Favorite);
+      const {data} = await api.get<Film[]>(ApiRoute.Favorite);
       dispatch(loadFavorite(data));
     } catch (error) {
       errorHandle(error);
@@ -128,7 +128,7 @@ export const fetchReviewsAction = createAsyncThunk<void, number, {
   'data/fetchReviews',
   async (filmId, {dispatch, extra: api}) => {
     try {
-      const {data} = await api.get<Review[]>(`${APIRoute.Comments}${filmId}`);
+      const {data} = await api.get<Review[]>(`${ApiRoute.Comments}${filmId}`);
       dispatch(loadReviews(data));
     } catch (error) {
       errorHandle(error);
@@ -144,7 +144,7 @@ export const fetchPromoFilmAction = createAsyncThunk<void, undefined, {
   'data/fetchPromoFilm',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      const {data} = await api.get<Film>(APIRoute.PromoFilm);
+      const {data} = await api.get<Film>(ApiRoute.PromoFilm);
       dispatch(loadPromoFilm(data));
     } catch (error) {
       errorHandle(error);
@@ -160,7 +160,7 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
   'user/checkAuth',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      await api.get(APIRoute.Login);
+      await api.get(ApiRoute.Login);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch (error) {
       errorHandle(error);
@@ -177,7 +177,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
   'user/login',
   async ({login: email, password}, {dispatch, extra: api}) => {
     try {
-      const {data: {token}} = await api.post<UserData>(APIRoute.Login, {email, password});
+      const {data: {token}} = await api.post<UserData>(ApiRoute.Login, {email, password});
       saveToken(token);
       dispatch(requireAuthorization(AuthorizationStatus.Auth));
     } catch (error) {
@@ -195,7 +195,7 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   'user.logout',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      await api.delete(APIRoute.Logout);
+      await api.delete(ApiRoute.Logout);
       dropToken();
       dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
     } catch (error) {
@@ -212,7 +212,7 @@ export const fetchUserData = createAsyncThunk<void, undefined, {
   'data/fetchUserData',
   async (_arg, {dispatch, extra: api}) => {
     try {
-      const {data} = await api.get<UserData>(APIRoute.Login);
+      const {data} = await api.get<UserData>(ApiRoute.Login);
       dispatch(loadUserData(data));
     } catch (error) {
       errorHandle(error);
@@ -228,7 +228,7 @@ export const sendNewReviewAction = createAsyncThunk<void, NewReview, {
   'data/sendNewReview',
   async ({filmId, comment, rating}, {dispatch, extra: api}) => {
     try {
-      await api.post<NewReview>(`${APIRoute.Comments}${filmId}`, {comment, rating});
+      await api.post<NewReview>(`${ApiRoute.Comments}${filmId}`, {comment, rating});
       dispatch(sendReview(false));
     } catch (error) {
       errorHandle(error);
@@ -244,7 +244,7 @@ export const changeFavoriteStatusAction = createAsyncThunk<void,{filmId: number,
   'data/changeFavoriteFilmStatus',
   async ({filmId, status}, {dispatch, extra: api}) => {
     try {
-      await api.post<Film>(`${APIRoute.Favorite}/${filmId}/${status}`);
+      await api.post<Film>(`${ApiRoute.Favorite}/${filmId}/${status}`);
       dispatch(fetchPromoFilmAction());
       dispatch(fetchFilmAction(filmId));
       dispatch(changeFavoriteStatus(false));

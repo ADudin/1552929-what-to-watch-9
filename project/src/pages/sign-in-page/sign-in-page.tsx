@@ -2,7 +2,8 @@ import LogoComponent from '../../components/logo-component/logo-component';
 
 import {
   useRef,
-  FormEvent
+  FormEvent,
+  useEffect
 } from 'react';
 
 import {
@@ -13,17 +14,27 @@ import {
 import 'react-toastify/dist/ReactToastify.css';
 
 import {useNavigate} from 'react-router-dom';
-import {useAppDispatch} from '../../hooks/hooks';
+
+import {
+  useAppDispatch,
+  useAppSelector
+} from '../../hooks/hooks';
+
 import {loginAction} from '../../store/api-actions';
 import {AuthData} from '../../types/auth-data';
-import {AppRoute} from '../../const';
 
-function SignInComponent(): JSX.Element {
+import {
+  AppRoute,
+  AuthorizationStatus
+} from '../../const';
+
+function SignInPage(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
@@ -62,6 +73,12 @@ function SignInComponent(): JSX.Element {
       navigate(AppRoute.Main);
     }
   };
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      navigate(AppRoute.Main);
+    }
+  });
 
   return (
     <div className="user-page">
@@ -119,4 +136,4 @@ function SignInComponent(): JSX.Element {
   );
 }
 
-export default SignInComponent;
+export default SignInPage;

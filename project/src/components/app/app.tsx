@@ -9,12 +9,12 @@ import {
   AppRoute
 } from '../../const';
 
-import MainComponent from '../../pages/main-page/main-page';
-import SignInComponent from '../../pages/sign-in-page/sign-in-page';
-import MyListComponent from '../../pages/my-list-page/my-list-page';
-import MoviePageComponent from '../../pages/movie-page/movie-page';
-import AddReviewComponent from '../../pages/add-review-page/add-review-page';
-import PlayerComponent from '../../pages/player-page/player-page';
+import MainPage from '../../pages/main-page/main-page';
+import SignInPage from '../../pages/sign-in-page/sign-in-page';
+import MyListPage from '../../pages/my-list-page/my-list-page';
+import MoviePage from '../../pages/movie-page/movie-page';
+import AddReviewPage from '../../pages/add-review-page/add-review-page';
+import PlayerPage from '../../pages/player-page/player-page';
 import NotFoundComponent from '../not-found-component/not-found-component';
 import LoadingScreen from '../loading-screen/loading-screen';
 
@@ -38,31 +38,31 @@ function App(): JSX.Element {
     <Routes>
       <Route
         path={AppRoute.Main}
-        element={<MainComponent />}
+        element={<MainPage />}
       />
       <Route
         path={AppRoute.SignIn}
-        element={<SignInComponent />}
+        element={<SignInPage />}
       />
       <Route
         path={AppRoute.MyList}
         element={
           <PrivatRoute authorizationStatus={authorizationStatus}>
-            <MyListComponent />
+            <MyListPage />
           </PrivatRoute>
         }
       />
       <Route
         path={AppRoute.Film}
-        element={<MoviePageComponent />}
+        element={<MoviePage />}
       />
       <Route
         path={AppRoute.AddReview}
-        element={<AddReviewComponent films = {films} />}
+        element={<AddReviewPage films = {films} />}
       />
       <Route
         path={AppRoute.Player}
-        element={<PlayerComponent />}
+        element={<PlayerPage />}
       />
       <Route
         path="*"

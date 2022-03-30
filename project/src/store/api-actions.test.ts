@@ -18,7 +18,7 @@ import {
 } from './api-actions';
 
 import {loadUserData, requireAuthorization} from './user-process/user-process';
-import {APIRoute} from '../const';
+import {ApiRoute} from '../const';
 import {State} from '../types/state';
 import {AuthData} from '../types/auth-data';
 
@@ -54,7 +54,7 @@ describe('Async actions', () => {
   it('should update authorization status to "auth" when server return 200', async () => {
     const store = mockStore();
     mockAPI
-      .onGet(APIRoute.Login)
+      .onGet(ApiRoute.Login)
       .reply(200, []);
 
     expect(store.getActions()).toEqual([]);
@@ -70,7 +70,7 @@ describe('Async actions', () => {
     const fakeUser: AuthData = {login: 'test@test.ru', password: 'qwerty12345'};
 
     mockAPI
-      .onPost(APIRoute.Login)
+      .onPost(ApiRoute.Login)
       .reply(200, {token: 'secret'});
 
     const store = mockStore();
@@ -88,7 +88,7 @@ describe('Async actions', () => {
 
   it('should dispatch Logout when Delete /logout', async () => {
     mockAPI
-      .onDelete(APIRoute.Logout)
+      .onDelete(ApiRoute.Logout)
       .reply(204);
 
     const store = mockStore();
@@ -108,7 +108,7 @@ describe('Async actions', () => {
     const fakeFilms = [makeFakeFilmData(), makeFakeFilmData()];
 
     mockAPI
-      .onGet(APIRoute.Films)
+      .onGet(ApiRoute.Films)
       .reply(200, fakeFilms);
 
     const store = mockStore();
@@ -125,7 +125,7 @@ describe('Async actions', () => {
     const filmId = fakeFilm.id;
 
     mockAPI
-      .onGet(`${APIRoute.Film}${filmId}`)
+      .onGet(`${ApiRoute.Film}${filmId}`)
       .reply(200, fakeFilm);
 
     const store = mockStore();
@@ -143,7 +143,7 @@ describe('Async actions', () => {
     const fakeSimilarFilms = [makeFakeFilmData(), makeFakeFilmData()];
 
     mockAPI
-      .onGet(`${APIRoute.SimilarFilms}${filmId}/similar`)
+      .onGet(`${ApiRoute.SimilarFilms}${filmId}/similar`)
       .reply(200, fakeSimilarFilms);
 
     const store = mockStore();
@@ -159,7 +159,7 @@ describe('Async actions', () => {
     const fakeFavoriteFilms = [makeFakeFilmData(), makeFakeFilmData()];
 
     mockAPI
-      .onGet(APIRoute.Favorite)
+      .onGet(ApiRoute.Favorite)
       .reply(200, fakeFavoriteFilms);
 
     const store = mockStore();
@@ -177,7 +177,7 @@ describe('Async actions', () => {
     const filmId = fakeFilm.id;
 
     mockAPI
-      .onGet(`${APIRoute.Comments}${filmId}`)
+      .onGet(`${ApiRoute.Comments}${filmId}`)
       .reply(200, fakeReviews);
 
     const store = mockStore();
@@ -193,7 +193,7 @@ describe('Async actions', () => {
     const fakePromoFilm = makeFakeFilmData();
 
     mockAPI
-      .onGet(APIRoute.PromoFilm)
+      .onGet(ApiRoute.PromoFilm)
       .reply(200, fakePromoFilm);
 
     const store = mockStore();
@@ -209,7 +209,7 @@ describe('Async actions', () => {
     const fakeUserData = makeFakeUserData();
 
     mockAPI
-      .onGet(APIRoute.Login)
+      .onGet(ApiRoute.Login)
       .reply(200, fakeUserData);
 
     const store = mockStore();
@@ -229,7 +229,7 @@ describe('Async actions', () => {
     const rating = fakeNewReview.rating;
 
     mockAPI
-      .onPost(`${APIRoute.Comments}${filmId}`, {comment, rating})
+      .onPost(`${ApiRoute.Comments}${filmId}`, {comment, rating})
       .reply(200, fakeNewReview);
 
     const store = mockStore();
@@ -247,7 +247,7 @@ describe('Async actions', () => {
     const status = fakeFilm.isFavorite;
 
     mockAPI
-      .onPost(`${APIRoute.Favorite}/${filmId}/${status}`)
+      .onPost(`${ApiRoute.Favorite}/${filmId}/${status}`)
       .reply(200, fakeFilm);
 
     const store = mockStore();

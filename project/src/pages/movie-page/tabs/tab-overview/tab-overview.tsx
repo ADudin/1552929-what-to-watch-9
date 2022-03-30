@@ -1,5 +1,5 @@
 import {Film} from '../../../../types/film';
-import {TEXT_RATING} from '../../../../const';
+import {TextRating} from '../../../../const';
 
 type OverviewTabProps = {
   film: Film | object,
@@ -7,19 +7,19 @@ type OverviewTabProps = {
 
 const getTextRating = (rating: number) => {
   if (rating < 3) {
-    return TEXT_RATING.BAD;
+    return TextRating.BAD;
   }
   if (rating < 5) {
-    return TEXT_RATING.NORMAL;
+    return TextRating.NORMAL;
   }
   if (rating < 8) {
-    return TEXT_RATING.GOOD;
+    return TextRating.GOOD;
   }
   if (rating < 10) {
-    return TEXT_RATING.VERY_GOOD;
+    return TextRating.VERY_GOOD;
   }
 
-  return TEXT_RATING.AWESOME;
+  return TextRating.AWESOME;
 };
 
 function OverviewTab({film}: OverviewTabProps): JSX.Element {

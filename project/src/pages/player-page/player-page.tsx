@@ -27,7 +27,7 @@ import {Watch} from 'react-loader-spinner';
 
 dayjs.extend(duration);
 
-function PlayerComponent(): JSX.Element {
+function PlayerPage(): JSX.Element {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const params = useParams();
@@ -173,4 +173,4 @@ function PlayerComponent(): JSX.Element {
   );
 }
 
-export default PlayerComponent;
+export default PlayerPage;
