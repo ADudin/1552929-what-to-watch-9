@@ -1,7 +1,7 @@
 import {Film} from '../../types/film';
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
-import VideoPlayerComponent from '../preview-video-component/preview-video-component';
+import PreviewVideoPlayerComponent from '../preview-video-component/preview-video-component';
 
 type FilmCardComponentProps = {
   film: Film,
@@ -29,7 +29,7 @@ function FilmCardComponent({film}: FilmCardComponentProps): JSX.Element {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        <VideoPlayerComponent isPlaying = {film.id === activePlayer} film = {film} />
+        <PreviewVideoPlayerComponent isPlaying = {film.id === activePlayer} film = {film} />
       </div>
       <h3 className="small-film-card__title">
         <Link className="small-film-card__link" to={`/films/${film.id}`}>{film.name}</Link>
