@@ -17,8 +17,10 @@ import AddReviewPage from '../../pages/add-review-page/add-review-page';
 import PlayerPage from '../../pages/player-page/player-page';
 import NotFoundComponent from '../not-found-component/not-found-component';
 import LoadingScreen from '../loading-screen/loading-screen';
+import ErrorScreen from '../error-screen/error-screen';
 
 import PrivatRoute from '../private-route/private-route';
+import {LOADING_ERROR_MESSAGE} from '../../const';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(({USER}) => USER.authorizationStatus);
@@ -26,7 +28,14 @@ function App(): JSX.Element {
   const {
     films,
     isDataLoaded,
+    isLoadingError,
   } = useAppSelector(({DATA}) => DATA);
+
+  if (isLoadingError) {
+    return (
+      <ErrorScreen error = {LOADING_ERROR_MESSAGE}/>
+    );
+  }
 
   if (!isDataLoaded) {
     return (

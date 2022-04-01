@@ -15,7 +15,9 @@ import {
   loadFavorite,
   changeFavoriteStatus,
   loadReviews,
-  sendReview
+  sendReview,
+  setLoadingError,
+  setReviewDataSent
 } from './film-data/film-data';
 
 import {
@@ -67,6 +69,7 @@ export const fetchFilmAction = createAsyncThunk<void, number, {
       const {data} = await api.get<Film>(`${ApiRoute.Film}${filmId}`);
       dispatch(loadFilm(data));
     } catch (error) {
+      dispatch(setLoadingError(true));
       errorHandle(error);
     }
   },
@@ -83,6 +86,7 @@ export const fetchFilmsAction = createAsyncThunk<void, undefined, {
       const {data} = await api.get<Film[]>(ApiRoute.Films);
       dispatch(loadFilms(data));
     } catch (error) {
+      dispatch(setLoadingError(true));
       errorHandle(error);
     }
   },
@@ -99,6 +103,7 @@ export const fetchSimilarFilmsAction = createAsyncThunk<void, number, {
       const {data} = await api.get<Film[]>(`${ApiRoute.SimilarFilms}${filmId}/similar`);
       dispatch(loadSimilarFilms(data));
     } catch (error) {
+      dispatch(setLoadingError(true));
       errorHandle(error);
     }
   },
@@ -115,6 +120,7 @@ export const fetchFavoriteAction = createAsyncThunk<void, undefined, {
       const {data} = await api.get<Film[]>(ApiRoute.Favorite);
       dispatch(loadFavorite(data));
     } catch (error) {
+      dispatch(setLoadingError(true));
       errorHandle(error);
     }
   },
@@ -131,6 +137,7 @@ export const fetchReviewsAction = createAsyncThunk<void, number, {
       const {data} = await api.get<Review[]>(`${ApiRoute.Comments}${filmId}`);
       dispatch(loadReviews(data));
     } catch (error) {
+      dispatch(setLoadingError(true));
       errorHandle(error);
     }
   },
@@ -147,6 +154,7 @@ export const fetchPromoFilmAction = createAsyncThunk<void, undefined, {
       const {data} = await api.get<Film>(ApiRoute.PromoFilm);
       dispatch(loadPromoFilm(data));
     } catch (error) {
+      dispatch(setLoadingError(true));
       errorHandle(error);
     }
   },
@@ -215,6 +223,7 @@ export const fetchUserData = createAsyncThunk<void, undefined, {
       const {data} = await api.get<UserData>(ApiRoute.Login);
       dispatch(loadUserData(data));
     } catch (error) {
+      dispatch(setLoadingError(true));
       errorHandle(error);
     }
   },
@@ -230,6 +239,7 @@ export const sendNewReviewAction = createAsyncThunk<void, NewReview, {
     try {
       await api.post<NewReview>(`${ApiRoute.Comments}${filmId}`, {comment, rating});
       dispatch(sendReview(false));
+      dispatch(setReviewDataSent(true));
     } catch (error) {
       errorHandle(error);
     }

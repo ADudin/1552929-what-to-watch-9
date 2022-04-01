@@ -33,6 +33,8 @@ const initialState = {
   isDataLoaded: false,
   isDataSending: false,
   error: '',
+  isLoadingError: false,
+  isReviewDataSent: false,
 };
 
 describe('Reducer: filmData', () => {
@@ -53,6 +55,8 @@ describe('Reducer: filmData', () => {
         isDataLoaded: false,
         isDataSending: false,
         error: '',
+        isLoadingError: false,
+        isReviewDataSent: false,
       });
   });
 
@@ -68,6 +72,8 @@ describe('Reducer: filmData', () => {
         isDataLoaded: false,
         isDataSending: false,
         error: '',
+        isLoadingError: false,
+        isReviewDataSent: false,
       });
   });
 
@@ -83,6 +89,8 @@ describe('Reducer: filmData', () => {
         isDataLoaded: true,
         isDataSending: false,
         error: '',
+        isLoadingError: false,
+        isReviewDataSent: false,
       });
   });
 
@@ -98,6 +106,8 @@ describe('Reducer: filmData', () => {
         isDataLoaded: false,
         isDataSending: false,
         error: '',
+        isLoadingError: false,
+        isReviewDataSent: false,
       });
   });
 
@@ -113,6 +123,8 @@ describe('Reducer: filmData', () => {
         isDataLoaded: false,
         isDataSending: false,
         error: '',
+        isLoadingError: false,
+        isReviewDataSent: false,
       });
   });
 
@@ -127,6 +139,8 @@ describe('Reducer: filmData', () => {
       isDataLoaded: false,
       isDataSending: true,
       error: '',
+      isLoadingError: false,
+      isReviewDataSent: false,
     };
 
     expect(filmData.reducer(state, changeFavoriteStatus(false)))
@@ -140,6 +154,8 @@ describe('Reducer: filmData', () => {
         isDataLoaded: false,
         isDataSending: false,
         error: '',
+        isLoadingError: false,
+        isReviewDataSent: false,
       });
   });
 
@@ -155,6 +171,8 @@ describe('Reducer: filmData', () => {
         isDataLoaded: false,
         isDataSending: false,
         error: fakeError,
+        isLoadingError: false,
+        isReviewDataSent: false,
       });
   });
 
@@ -169,6 +187,8 @@ describe('Reducer: filmData', () => {
       isDataLoaded: false,
       isDataSending: true,
       error: '',
+      isLoadingError: false,
+      isReviewDataSent: false,
     };
 
     expect(filmData.reducer(state, sendReview(false)))
@@ -182,6 +202,8 @@ describe('Reducer: filmData', () => {
         isDataLoaded: false,
         isDataSending: false,
         error: '',
+        isLoadingError: false,
+        isReviewDataSent: false,
       });
   });
 
@@ -197,6 +219,8 @@ describe('Reducer: filmData', () => {
         isDataLoaded: false,
         isDataSending: false,
         error: '',
+        isLoadingError: false,
+        isReviewDataSent: false,
       });
   });
 });

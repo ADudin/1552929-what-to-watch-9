@@ -88,3 +88,5 @@ export enum NameSpace {
   film = 'FILM',
   user = 'USER',
 }
+
+export const LOADING_ERROR_MESSAGE = 'Sorry, can\'t get data from server';

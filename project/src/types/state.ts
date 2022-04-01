@@ -24,6 +24,8 @@ export type FilmData = {
   error: string,
   isDataLoaded: boolean,
   isDataSending: boolean,
+  isLoadingError: boolean,
+  isReviewDataSent: boolean,
 };
 
 export type State = ReturnType<typeof store.getState>;
