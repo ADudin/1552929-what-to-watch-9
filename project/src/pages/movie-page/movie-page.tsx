@@ -26,7 +26,7 @@ import {
   fetchReviewsAction
 } from '../../store/api-actions';
 
-function MoviePageComponent(): JSX.Element {
+function MoviePage(): JSX.Element {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const params = useParams();
@@ -139,4 +139,4 @@ function MoviePageComponent(): JSX.Element {
   );
 }
 
-export default MoviePageComponent;
+export default MoviePage;

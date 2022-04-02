@@ -23,9 +23,11 @@ import {fetchFilmAction} from '../../store/api-actions';
 
 import {Film} from '../../types/film';
 
+import {Watch} from 'react-loader-spinner';
+
 dayjs.extend(duration);
 
-function PlayerComponent(): JSX.Element {
+function PlayerPage(): JSX.Element {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   const params = useParams();
@@ -49,6 +51,7 @@ function PlayerComponent(): JSX.Element {
   } = film as Film;
 
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isLoaded, setLoaded] = useState(false);
   const [videoDuration, setVideoDuration] = useState(0);
   const [secondsWatched, setSecondsWatched] = useState(0);
   const [videoProgress, setVideoProgress] = useState(0);
@@ -106,12 +109,14 @@ function PlayerComponent(): JSX.Element {
 
   return (
     <div className="player">
+      {isLoaded ? null : <Watch color="#00BFFF" height={80} width={80} />}
       <video
         src = {videoLink}
         ref = {videoRef}
         className="player__video"
         poster = {backgroundImage}
         onTimeUpdate = {watchedTimeUpdateHandler}
+        onCanPlay = {() => setLoaded(true)}
       >
       </video>
 
@@ -168,4 +173,4 @@ function PlayerComponent(): JSX.Element {
   );
 }
 
-export default PlayerComponent;
+export default PlayerPage;

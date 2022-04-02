@@ -12,6 +12,8 @@ const initialState: FilmData = {
   isDataLoaded: false,
   isDataSending: false,
   error: '',
+  isLoadingError: false,
+  isReviewDataSent: false,
 };
 
 export const filmData = createSlice({
@@ -24,6 +26,12 @@ export const filmData = createSlice({
     },
     setError: (state, action) => {
       state.error = action.payload;
+    },
+    setLoadingError: (state, action) => {
+      state.isLoadingError = action.payload;
+    },
+    setReviewDataSent: (state, action) => {
+      state.isReviewDataSent = action.payload;
     },
     loadPromoFilm: (state, action) => {
       state.promoFilm = action.payload;
@@ -59,4 +67,6 @@ export const {
   changeFavoriteStatus,
   loadReviews,
   sendReview,
+  setLoadingError,
+  setReviewDataSent,
 } = filmData.actions;

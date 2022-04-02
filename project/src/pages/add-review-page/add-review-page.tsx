@@ -15,12 +15,12 @@ import {
   AppRoute
 } from '../../const';
 
-type AddReviewComponentProps = {
+type AddReviewPageProps = {
   films: Film[];
 }
 
 
-function AddReviewComponent({films}: AddReviewComponentProps): JSX.Element {
+function AddReviewPage({films}: AddReviewPageProps): JSX.Element {
   const params = useParams();
   const navigate = useNavigate();
   const film = films.find((item) => item.id === Number(params.id));
@@ -71,4 +71,4 @@ function AddReviewComponent({films}: AddReviewComponentProps): JSX.Element {
   );
 }
 
-export default AddReviewComponent;
+export default AddReviewPage;

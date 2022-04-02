@@ -20,7 +20,7 @@ import {
   sendNewReviewAction
 } from '../../store/api-actions';
 
-import {sendReview} from '../../store/film-data/film-data';
+import {sendReview, setReviewDataSent} from '../../store/film-data/film-data';
 
 function ReviewFormComponent(): JSX.Element {
   const params = useParams();
@@ -31,11 +31,16 @@ function ReviewFormComponent(): JSX.Element {
   const [userComment, setUserComment] = useState('');
   const [isUserReviewRating, setIsUserReviewSetting] = useState<boolean>(false);
 
+  const isReviewSending = useAppSelector(({DATA}) => DATA.isDataSending);
+  const isReviewDataSent = useAppSelector(({DATA}) => DATA.isReviewDataSent);
+
   useEffect(() => {
     dispatch(fetchUserData());
-  });
-
-  const isReviewSending = useAppSelector(({DATA}) => DATA.isDataSending);
+    if (isReviewDataSent) {
+      navigate(`/films/${params.id}`);
+      dispatch(setReviewDataSent(false));
+    }
+  }, [isReviewDataSent, params.id, navigate, dispatch]);
 
   const userReviewRatingChangeHandler = (userRating: number) => {
     setUserReviewRating(userRating);
@@ -56,7 +61,6 @@ function ReviewFormComponent(): JSX.Element {
               comment: userComment,
               rating: userReviewRating,
             }));
-            navigate(`/films/${params.id}`);
           }
         }
       >

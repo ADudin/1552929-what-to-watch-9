@@ -6,7 +6,7 @@ type VideoPlayerComponentProps = {
   film: Film | object;
 }
 
-function VideoPlayerComponent ({isPlaying, film}: VideoPlayerComponentProps): JSX.Element {
+function PreviewVideoPlayerComponent ({isPlaying, film}: VideoPlayerComponentProps): JSX.Element {
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -39,4 +39,4 @@ function VideoPlayerComponent ({isPlaying, film}: VideoPlayerComponentProps): JS
   );
 }
 
-export default VideoPlayerComponent;
+export default PreviewVideoPlayerComponent;

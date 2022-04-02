@@ -14,7 +14,7 @@ import {
 
 import {resetCountAction} from '../../store/film-process/film-process';
 
-import {DEFAULT_ACTIVE_GENRE} from '../../const';
+import {DEFAULT_ACTIVE_GENRE, MAX_GENRES_COUNT} from '../../const';
 
 function CatalogComponent(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -40,7 +40,7 @@ function CatalogComponent(): JSX.Element {
       <h2 className="catalog__title visually-hidden">Catalog</h2>
 
       <ul className="catalog__genres-list">
-        <GenresListComponent genres = {genres} />
+        <GenresListComponent genres = {genres.slice(0, MAX_GENRES_COUNT)} />
       </ul>
 
       <div className="catalog__films-list">

@@ -54,7 +54,9 @@ export const FILM_CARDS_COUNT = 8;
 
 export const FILM_CARDS_COUNT_STEP = 8;
 
-export enum APIRoute {
+export const MAX_GENRES_COUNT = 9;
+
+export enum ApiRoute {
   Films = '/films',
   Film = '/films/',
   SimilarFilms = '/films/',
@@ -67,13 +69,13 @@ export enum APIRoute {
 
 export const TIMEOUT_SHOW_ERROR = 5000;
 
-export enum HTTP_CODE {
+export enum HttpCode {
   BAD_REQUEST = 400,
   UNAUTHORIZED = 401,
   NOT_FOUND = 404,
 }
 
-export enum TEXT_RATING {
+export enum TextRating {
   BAD = 'Bad',
   NORMAL = 'Normal',
   GOOD = 'Good',
@@ -86,3 +88,5 @@ export enum NameSpace {
   film = 'FILM',
   user = 'USER',
 }
+
+export const LOADING_ERROR_MESSAGE = 'Sorry, can\'t get data from server';

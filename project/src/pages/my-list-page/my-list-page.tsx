@@ -10,7 +10,7 @@ import {
 
 import {fetchFavoriteAction} from '../../store/api-actions';
 
-function MyListComponent(): JSX.Element {
+function MyListPage(): JSX.Element {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -62,4 +62,4 @@ function MyListComponent(): JSX.Element {
   );
 }
 
-export default MyListComponent;
+export default MyListPage;
