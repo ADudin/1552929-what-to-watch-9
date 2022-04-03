@@ -70,23 +70,23 @@ export enum ApiRoute {
 export const TIMEOUT_SHOW_ERROR = 5000;
 
 export enum HttpCode {
-  BAD_REQUEST = 400,
-  UNAUTHORIZED = 401,
-  NOT_FOUND = 404,
+  BadRequest = 400,
+  Unauthorized = 401,
+  NotFound = 404,
 }
 
 export enum TextRating {
-  BAD = 'Bad',
-  NORMAL = 'Normal',
-  GOOD = 'Good',
-  VERY_GOOD = 'Very good',
-  AWESOME = 'Awesome',
+  Bad = 'Bad',
+  Normal = 'Normal',
+  Good = 'Good',
+  VeryGood = 'Very good',
+  Awesome = 'Awesome',
 }
 
 export enum NameSpace {
-  data = 'DATA',
-  film = 'FILM',
-  user = 'USER',
+  Data = 'DATA',
+  Film = 'FILM',
+  User = 'USER',
 }
 
 export const LOADING_ERROR_MESSAGE = 'Sorry, can\'t get data from server';

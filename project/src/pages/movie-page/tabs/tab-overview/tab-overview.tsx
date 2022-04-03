@@ -7,19 +7,19 @@ type OverviewTabProps = {
 
 const getTextRating = (rating: number) => {
   if (rating < 3) {
-    return TextRating.BAD;
+    return TextRating.Bad;
   }
   if (rating < 5) {
-    return TextRating.NORMAL;
+    return TextRating.Normal;
   }
   if (rating < 8) {
-    return TextRating.GOOD;
+    return TextRating.Good;
   }
   if (rating < 10) {
-    return TextRating.VERY_GOOD;
+    return TextRating.VeryGood;
   }
 
-  return TextRating.AWESOME;
+  return TextRating.Awesome;
 };
 
 function OverviewTab({film}: OverviewTabProps): JSX.Element {
