@@ -90,3 +90,7 @@ export enum NameSpace {
 }
 
 export const LOADING_ERROR_MESSAGE = 'Sorry, can\'t get data from server';
+
+export const MIN_USER_COMMENT_SYMBOLS_COUNT = 50;
+
+export const MAX_USER_COMMENT_SYMBOLS_COUNT = 400;

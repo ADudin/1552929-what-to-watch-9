@@ -2,7 +2,7 @@ import request from 'axios';
 import {store} from '../store/store';
 import {setError} from '../store/film-data/film-data';
 import {clearErrorAction} from '../store/api-actions';
-import {ErrorType} from '../types/error';
+import {ErrorType} from '../types/error-type';
 import {HttpCode} from '../const';
 
 export const errorHandle = (error: ErrorType): void => {

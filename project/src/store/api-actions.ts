@@ -30,7 +30,7 @@ import {
   dropToken
 } from '../services/token';
 
-import {errorHandle} from '../services/error-handle';
+import {errorHandle} from '../services/handle-error';
 
 import {
   ApiRoute,
