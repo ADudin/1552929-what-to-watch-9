@@ -34,19 +34,44 @@ function OverviewTab({film}: OverviewTabProps): JSX.Element {
   return (
     <>
       <div className="film-rating">
-        <div className="film-rating__score">{rating}</div>
+        <div
+          className="film-rating__score"
+          data-testid = 'rating'
+        >
+          {rating}
+        </div>
         <p className="film-rating__meta">
-          <span className="film-rating__level">{getTextRating(rating)}</span>
-          <span className="film-rating__count">{`${scoresCount} ratings`}</span>
+          <span
+            className="film-rating__level"
+            data-testid = 'text-rating'
+          >
+            {getTextRating(rating)}
+          </span>
+          <span
+            className="film-rating__count"
+            data-testid = 'scores-count'
+          >
+            {`${scoresCount} ratings`}
+          </span>
         </p>
       </div>
 
       <div className="film-card__text">
-        <p>{description}</p>
+        <p data-testid = 'description'>{description}</p>
 
-        <p className="film-card__director"><strong>Director: {director}</strong></p>
+        <p
+          className="film-card__director"
+          data-testid = 'director'
+        >
+          <strong>Director: {director}</strong>
+        </p>
 
-        <p className="film-card__starring"><strong>Starring: {starring?.join(', ')} and other</strong></p>
+        <p
+          className="film-card__starring"
+          data-testid = 'starring'
+        >
+          <strong>Starring: {starring?.join(', ')} and other</strong>
+        </p>
       </div>
     </>
   );
