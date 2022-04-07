@@ -2,9 +2,9 @@ import {Film} from '../../../types/film';
 import {Review} from '../../../types/review';
 import {Link} from 'react-router-dom';
 import {useState} from 'react';
-import DetailsTab from './tab-details/tab-details';
-import OverviewTab from './tab-overview/tab-overview';
-import ReviewsTab from './tab-reviews/tab-reviews';
+import DetailsTab from './details-tab/details-tab';
+import OverviewTab from './overview-tab/overview-tab';
+import ReviewsTab from './reviews-tab/reviews-tab';
 
 type MovieTabsProps = {
   film: Film | object,

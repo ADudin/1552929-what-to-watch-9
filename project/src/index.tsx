@@ -5,7 +5,7 @@ import {Provider} from 'react-redux';
 import App from './components/app/app';
 import ErrorMessage from './components/error-message/error-message';
 import {store} from './store/store';
-import HistoryRouter from './components/history-route/history-route';
+import HistoryRouter from './components/history-router/history-router';
 import browserHistory from './browser-history';
 
 import {

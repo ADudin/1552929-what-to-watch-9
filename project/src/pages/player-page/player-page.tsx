@@ -108,7 +108,10 @@ function PlayerPage(): JSX.Element {
   }
 
   return (
-    <div className="player">
+    <div
+      className="player"
+      data-testid='player-page'
+    >
       {isLoaded ? null : <Watch color="#00BFFF" height={80} width={80} />}
       <video
         src = {videoLink}

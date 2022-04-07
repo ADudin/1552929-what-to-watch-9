@@ -11,10 +11,11 @@ const getRuntimeFromMinutes = (mins: number) => {
 
   const HOURS_ABB = 'h ';
   const MINUTES_ABB = 'm';
-  const hours: number = Math.trunc(mins / 60);
-  const minutes: number = mins % 60;
+  const MINUTES_IN_HOUR = 60;
+  const hours: number = Math.trunc(mins / MINUTES_IN_HOUR);
+  const minutes: number = mins % MINUTES_IN_HOUR;
 
-  if (mins < 60) {
+  if (mins < MINUTES_IN_HOUR) {
 
     return minutes + MINUTES_ABB;
   }
@@ -54,15 +55,30 @@ function DetailsTab({film}: DetailsTabProps): JSX.Element {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{getRuntimeFromMinutes(runTime)}</span>
+          <span
+            className="film-card__details-value"
+            data-testid = 'run-time'
+          >
+            {getRuntimeFromMinutes(runTime)}
+          </span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>
-          <span className="film-card__details-value">{genre}</span>
+          <span
+            className="film-card__details-value"
+            data-testid = 'genre'
+          >
+            {genre}
+          </span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Released</strong>
-          <span className="film-card__details-value">{released}</span>
+          <span
+            className="film-card__details-value"
+            data-testid = 'released'
+          >
+            {released}
+          </span>
         </p>
       </div>
     </div>

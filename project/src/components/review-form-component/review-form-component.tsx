@@ -8,7 +8,11 @@ import {
   useNavigate
 } from 'react-router-dom';
 
-import {RATING_VALUES} from '../../const';
+import {
+  RATING_VALUES,
+  MIN_USER_COMMENT_SYMBOLS_COUNT,
+  MAX_USER_COMMENT_SYMBOLS_COUNT
+} from '../../const';
 
 import {
   useAppSelector,
@@ -20,7 +24,10 @@ import {
   sendNewReviewAction
 } from '../../store/api-actions';
 
-import {sendReview, setReviewDataSent} from '../../store/film-data/film-data';
+import {
+  sendReview,
+  setReviewDataSent
+} from '../../store/film-data/film-data';
 
 function ReviewFormComponent(): JSX.Element {
   const params = useParams();
@@ -108,7 +115,7 @@ function ReviewFormComponent(): JSX.Element {
             <button
               className="add-review__btn"
               type="submit"
-              disabled = {userComment.length < 50 || userComment.length > 400 || !isUserReviewRating || isReviewSending}
+              disabled = {userComment.length < MIN_USER_COMMENT_SYMBOLS_COUNT || userComment.length > MAX_USER_COMMENT_SYMBOLS_COUNT || !isUserReviewRating || isReviewSending}
             >
               Post
             </button>

@@ -34,7 +34,10 @@ function AddReviewPage({films}: AddReviewPageProps): JSX.Element {
   }, [navigate, authorizationStatus]);
 
   return (
-    <section className="film-card film-card--full">
+    <section
+      className="film-card film-card--full"
+      data-testid='add-review-page'
+    >
       <div className="film-card__header">
         <div className="film-card__bg">
           <img src={film?.backgroundImage} alt={film?.name} />

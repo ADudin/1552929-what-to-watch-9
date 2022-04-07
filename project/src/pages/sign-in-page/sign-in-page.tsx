@@ -94,6 +94,7 @@ function SignInPage(): JSX.Element {
           action=""
           className="sign-in__form"
           onSubmit = {handleSubmit}
+          data-testid='sign-in__form'
         >
           <div className="sign-in__fields">
             <div className="sign-in__field">

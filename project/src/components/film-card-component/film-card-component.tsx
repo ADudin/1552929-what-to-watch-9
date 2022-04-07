@@ -10,7 +10,7 @@ import {
   useEffect
 } from 'react';
 
-import PreviewVideoPlayerComponent from '../preview-video-component/preview-video-component';
+import PreviewVideoPlayerComponent from '../preview-video-player-component/preview-video-player-component';
 
 type FilmCardComponentProps = {
   film: Film,

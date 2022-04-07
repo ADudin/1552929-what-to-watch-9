@@ -19,15 +19,36 @@ function ReviewsTab({reviews}: ReviewsTabProps): JSX.Element {
         {reviews.map((review) => (
           <div className="review" key={review.id}>
             <blockquote className="review__quote">
-              <p className="review__text">{review.comment}</p>
+              <p
+                className="review__text"
+                data-testid = 'comment'
+              >
+                {review.comment}
+              </p>
 
               <footer className="review__details">
-                <cite className="review__author">{review.user.name}</cite>
-                <time className="review__date" dateTime={review.date}>{getFormattedDate(review.date)}</time>
+                <cite
+                  className="review__author"
+                  data-testid = 'author'
+                >
+                  {review.user.name}
+                </cite>
+                <time
+                  className="review__date"
+                  dateTime={review.date}
+                  data-testid = 'review-date'
+                >
+                  {getFormattedDate(review.date)}
+                </time>
               </footer>
             </blockquote>
 
-            <div className="review__rating">{review.rating}</div>
+            <div
+              className="review__rating"
+              data-testid = 'rating'
+            >
+              {review.rating}
+            </div>
           </div>
         ))}
       </div>

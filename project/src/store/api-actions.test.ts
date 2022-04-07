@@ -2,7 +2,7 @@ import {Action} from 'redux';
 import thunk, {ThunkDispatch} from 'redux-thunk';
 import MockAdapter from 'axios-mock-adapter';
 import {configureMockStore} from '@jedmao/redux-mock-store';
-import {createAPI} from '../services/api';
+import {createAPI} from '../services/create-api';
 
 import {
   checkAuthAction,
