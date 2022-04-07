@@ -61,7 +61,10 @@ function MoviePage(): JSX.Element {
 
   return (
     <>
-      <section className="film-card film-card--full">
+      <section
+        className="film-card film-card--full"
+        data-testid='movie-page'
+      >
         <div className="film-card__hero">
           <div className="film-card__bg">
             <img src={backgroundImage} alt={name} />

@@ -49,7 +49,10 @@ function MainPage(): JSX.Element {
           <UserBlockComponent />
         </header>
 
-        <div className="film-card__wrap">
+        <div
+          className="film-card__wrap"
+          data-testid='promo-film'
+        >
           <div className="film-card__info">
             <div className="film-card__poster">
               <img src={posterImage} alt={`${name} poster`} width="218" height="327" />
@@ -80,7 +83,10 @@ function MainPage(): JSX.Element {
         </div>
       </section>
 
-      <div className="page-content">
+      <div
+        className="page-content"
+        data-testid='main-content'
+      >
         <CatalogComponent />
 
         <footer className="page-footer">

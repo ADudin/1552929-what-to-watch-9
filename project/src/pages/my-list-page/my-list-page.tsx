@@ -38,7 +38,10 @@ function MyListPage(): JSX.Element {
         </ul>
       </header>
 
-      <section className="catalog">
+      <section
+        className="catalog"
+        data-testid='favorite-list'
+      >
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
         <div className="catalog__films-list">
